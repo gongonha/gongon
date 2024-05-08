@@ -1,0 +1,167 @@
+/* 전체 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* 헤더 스타일 */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #8BC34A;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav ul {
+  display: flex;
+}
+
+nav ul li {
+  margin-left: 20px;
+}
+
+.cta-btn {
+  background-color: #CDDC39;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* 히어로 섹션 스타일 */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: url('hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+
+/* 메뉴 섹션 스타일 */
+#menu {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.menu-item {
+  margin-bottom: 40px;
+}
+
+.menu-item img {
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+/* 브랜드 스토리 섹션 스타일 */
+#story {
+  padding: 100px 20px;
+  text-align: center;
+  background-color: #F1F8E9;
+}
+
+/* 프로모션 섹션 스타일 */
+#promotion {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.promotion-item {
+  margin-bottom: 40px;
+}
+
+.promotion-item img {
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+/* 리뷰 섹션 스타일 */
+#review {
+  padding: 100px 20px;
+  text-align: center;
+  background-color: #F1F8E9;
+}
+
+.review-item {
+  margin-bottom: 40px;
+}
+
+/* 푸터 스타일 */
+footer {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #8BC34A;
+  color: white;
+}
+
+.info {
+  margin-bottom: 20px;
+}
+
+.sns {
+  display: flex;
+  justify-content: center;
+}
+
+.sns li {
+  margin: 0 10px;
+}
+
+/* 반응형 스타일 */
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+  }
+
+  nav ul {
+    flex-direction: column;
+    margin-top: 20px;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+  }
+}

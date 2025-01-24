@@ -72,6 +72,7 @@
         <div class="menu-group">
             <div class="menu-group-title">기타 도구</div>
             <button data-target="metadataViewer">파일 메타데이터 뷰어</button>
+            <button data-target="businessCard">디지털 명함 생성기</button>
             <button data-target="urlShortener">URL 단축</button>
         </div>
 
@@ -603,6 +604,86 @@
                             <input type="text" id="shortUrl" readonly class="full-width">
                             <button id="copyButton" class="btn btn-secondary">복사</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 명함 생성기 섹션 -->
+        <div id="businessCard" class="section">
+            <h2>디지털 명함 생성기</h2>
+            <div class="business-card-container">
+                <div class="card-editor">
+                    <div class="template-selector">
+                        <label for="cardTemplate">템플릿 선택:</label>
+                        <select id="cardTemplate">
+                            <option value="modern">모던 심플</option>
+                            <option value="gradient">그라데이션</option>
+                            <option value="dark">다크 모드</option>
+                            <option value="simple">심플</option>
+                            <option value="border">보더</option>
+                        </select>
+                    </div>
+
+                    <div class="input-section">
+                        <h3>기본 정보</h3>
+                        <div class="input-group">
+                            <label for="name">이름</label>
+                            <input type="text" id="name" placeholder="홍길동">
+                        </div>
+                        <div class="input-group">
+                            <label for="position">부서 / 직책</label>
+                            <input type="text" id="position" placeholder="개발팀 / 팀장">
+                        </div>
+                        <div class="input-group">
+                            <label for="company">회사명</label>
+                            <input type="text" id="company" placeholder="(주)회사명">
+                        </div>
+
+                        <h3>연락처 정보</h3>
+                        <div class="input-group">
+                            <label for="phone">전화번호</label>
+                            <input type="tel" id="phone" placeholder="010-1234-5678">
+                        </div>
+                        <div class="input-group">
+                            <label for="email">이메일</label>
+                            <input type="email" id="email" placeholder="example@email.com">
+                        </div>
+                        <div class="input-group">
+                            <label for="address">주소</label>
+                            <input type="text" id="address" placeholder="서울시 강남구...">
+                        </div>
+                        <div class="input-group">
+                            <label for="website">웹사이트</label>
+                            <input type="url" id="website" placeholder="https://...">
+                        </div>
+                        <div class="input-group">
+                            <label for="fax">팩스번호</label>
+                            <input type="tel" id="fax" placeholder="0504-123-4567">
+                        </div>
+
+                        <div class="color-settings">
+                            <div class="input-group">
+                                <label for="primaryColor">주 색상</label>
+                                <input type="color" id="primaryColor" value="#1a73e8">
+                            </div>
+                            <div class="input-group">
+                                <label for="textColor">텍스트 색상</label>
+                                <input type="color" id="textColor" value="#000000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-preview">
+                    <h3>미리보기</h3>
+                    <div id="cardPreview" class="preview-container">
+                        <!-- 명함 미리보기가 여기에 표시됩니다 -->
+                    </div>
+                    <div class="preview-actions">
+                        <button id="saveAsImage" class="btn btn-primary">이미지로 저장</button>
+                        <button id="saveAsPdf" class="btn btn-primary">PDF로 저장</button>
+                        <button id="copyHtml" class="btn btn-secondary">HTML 복사</button>
                     </div>
                 </div>
             </div>

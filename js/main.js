@@ -16,6 +16,7 @@ import { initUnemploymentCalculator } from "./unemploymentCalculator.js";
 import { initIpChecker } from "./ipChecker.js";
 import { initTextAnalyzer } from "./textAnalyzer.js";
 import { initUrlShortener } from "./urlShortener.js";
+import { initBusinessCard } from "./businessCard.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     // PDF 변환 & 타임존 변환 버튼/섹션 제거 (기존 코드에서 제거 처리)
@@ -81,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initIpChecker();
     initTextAnalyzer();
     initUrlShortener();
+    initBusinessCard();
 
     // 메뉴 토글 기능
     initMenuToggle();

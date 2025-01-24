@@ -1680,3 +1680,221 @@ header {
 #shortUrl[readonly] {
     cursor: default;
 }
+
+/* 명함 생성기 스타일 */
+.business-card-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .business-card-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card-editor {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.template-selector {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: center;
+}
+
+.input-section {
+    display: grid;
+    gap: 15px;
+}
+
+.input-section h3 {
+    margin-top: 20px;
+    color: #333;
+}
+
+.input-group {
+    display: grid;
+    gap: 5px;
+}
+
+.input-group input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.color-settings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.preview-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    width: 100%;
+    overflow: hidden; /* float 요소 포함 */
+}
+
+/* 명함 내부 ul 스타일 수정 */
+.preview-container ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden; /* float 요소 포함 */
+    width: 100%;
+}
+
+.preview-container ul:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/* 명함 내부 li 스타일 수정 */
+.preview-container ul li {
+    margin-bottom: 5px;
+}
+
+/* 테이블 스타일 수정 */
+.preview-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+}
+
+.preview-container td {
+    vertical-align: top;
+}
+
+/* float 요소를 포함하는 행 수정 */
+.preview-container tr:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/* 연락처 정보 컨테이너 */
+.preview-container .contact-info {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* 명함 전체 컨테이너 */
+.business-card-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 30px;
+}
+
+/* 카드 미리보기 영역 */
+.card-preview {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* 미리보기 제목 */
+.card-preview h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* 버튼 그룹 */
+.preview-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* 명함 크기 수정 */
+.size-standard {
+    width: 450px;
+    height: 250px;
+}
+
+.size-large {
+    width: 500px;
+    height: 300px;
+}
+
+.size-square {
+    width: 400px;
+    height: 400px;
+}
+
+/* 템플릿 스타일 */
+.card-modern {
+    padding: 20px;
+    background: var(--primary-color);
+    color: var(--text-color);
+    height: 100%;
+    display: grid;
+    gap: 15px;
+}
+
+.card-classic {
+    padding: 20px;
+    border: 2px solid var(--primary-color);
+    color: var(--text-color);
+    height: 100%;
+    display: grid;
+    gap: 10px;
+}
+
+.card-creative {
+    padding: 20px;
+    background: linear-gradient(135deg, var(--primary-color), white);
+    color: var(--text-color);
+    height: 100%;
+    display: grid;
+    gap: 15px;
+}
+
+.card-minimal {
+    padding: 20px;
+    background: white;
+    color: var(--text-color);
+    height: 100%;
+    display: grid;
+    gap: 10px;
+    text-align: center;
+}
+
+.preview-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+/* 반응형 조정 */
+@media screen and (max-width: 768px) {
+    .business-card-container {
+        padding: 10px;
+    }
+    
+    .preview-container {
+        transform: scale(0.8);
+        transform-origin: top left;
+    }
+}

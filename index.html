@@ -21,21 +21,57 @@
     </button>
 
     <nav id="menu" class="menu-closed">
-        <button data-target="main">메인화면</button>
-        <button data-target="todo">To-Do 리스트</button>
-        <button data-target="qrcode">QR 코드 생성기</button>
-        <button data-target="calculator">계산기</button>
-        <button data-target="converter">단위 변환기</button>
-        <button data-target="imageCompressor">이미지 압축기</button>
-        <button data-target="speedTest">네트워크 속도 테스트</button>
-        <button data-target="seoAnalyzer">SEO 분석 도구</button>
-        <button data-target="reservationMove">예약 이동</button>
-        <button data-target="metadataViewer">파일 메타데이터 뷰어</button>
-        <button data-target="salaryCalculator">시급/월급 계산기</button>
-        <button data-target="textCompare">텍스트 비교</button>
-        <button data-target="pdfTools">PDF 도구</button>
-        <button data-target="retirementCalculator">퇴직금 계산기</button>
-        <button data-target="unemploymentCalculator">실업급여 계산기</button>
+        <!-- 메인 메뉴 그룹 -->
+        <div class="menu-group">
+            <div class="menu-group-title">메인</div>
+            <button data-target="main">메인화면</button>
+            <button data-target="todo">To-Do 리스트</button>
+        </div>
+
+        <!-- 일정도구 -->
+        <div class="menu-group">
+            <div class="menu-group-title">일정 관리</div>
+            <button data-target="todo">To-Do 리스트</button>
+            <button data-target="reservationMove">예약 이동</button>
+        </div>
+
+        <!-- 문서 도구 그룹 -->
+        <div class="menu-group">
+            <div class="menu-group-title">문서 도구</div>
+            <button data-target="pdfTools">PDF 도구</button>
+            <button data-target="textCompare">텍스트 비교</button>
+        </div>
+
+        <!-- 변환 도구 그룹 -->
+        <div class="menu-group">
+            <div class="menu-group-title">변환 도구</div>
+            <button data-target="qrcode">QR 코드 생성기</button>
+            <button data-target="converter">단위 변환기</button>
+            <button data-target="imageCompressor">이미지 압축기</button>
+        </div>
+
+        <!-- 계산기 그룹 -->
+        <div class="menu-group">
+            <div class="menu-group-title">계산기</div>
+            <button data-target="calculator">일반 계산기</button>
+            <button data-target="salaryCalculator">시급/월급 계산기</button>
+            <button data-target="retirementCalculator">퇴직금 계산기</button>
+            <button data-target="unemploymentCalculator">실업급여 계산기</button>
+        </div>
+
+        <!-- 네트워크 도구 그룹 -->
+        <div class="menu-group">
+            <div class="menu-group-title">네트워크 도구</div>
+            <button data-target="speedTest">네트워크 속도 테스트</button>
+            <button data-target="ipChecker">IP 주소 확인</button>
+            <button data-target="seoAnalyzer">SEO 분석 도구</button>
+        </div>
+
+        <!-- 기타 도구 -->
+        <div class="menu-group">
+            <div class="menu-group-title">기타 도구</div>
+            <button data-target="metadataViewer">파일 메타데이터 뷰어</button>
+        </div>
     </nav>
 
     <main>
@@ -50,8 +86,9 @@
                 </div>
                 <div class="version-info">
                     <h3>v0.1 버전 (2025-01-24)</h3>
-                    <p>편리하게 사무 도구를 이용할 수 있도록 만들었습니다.</p>
-                    <p>예약 프로그램들은 인터넷을 끄지 말고 최소화해놓으면 실행됩니다.</p>
+                    <p>·편리하게 사무 도구를 이용할 수 있도록 만들었습니다.</p>
+                    <p>·예약 프로그램들은 인터넷을 끄지 말고 최소화해놓으면 실행됩니다.</p>
+                    <p>·메뉴 그룹을 나눠놓았으며 메인 화면에서 검색 사이트 이동이 용이하게 바꿨습니다.</p>
                 </div>
             </div>
         </div>
@@ -406,30 +443,31 @@
             </div>
         </div>
 
-<!-- 퇴직금 계산기 섹션 -->
-<div id="retirementCalculator" class="section">
-    <h2>퇴직금 계산기</h2>
-    <div class="calculator-container">
-        <div class="input-group">
-            <label for="averageSalary">평균 월급 (원)</label>
-            <input type="number" id="averageSalary" placeholder="평균 월급을 입력하세요">
+        <!-- 퇴직금 계산기 섹션 -->
+        <div id="retirementCalculator" class="section">
+            <h2>퇴직금 계산기</h2>
+            <div class="calculator-container">
+                <div class="input-group">
+                    <label for="averageSalary">평균 월급 (원)</label>
+                    <input type="number" id="averageSalary" placeholder="평균 월급을 입력하세요">
+                </div>
+                <div class="input-group">
+                    <label for="yearsWorked">근무 연수 (년)</label>
+                    <input type="number" id="yearsWorked" placeholder="근무 연수를 입력하세요">
+                </div>
+                <div class="input-group">
+                    <label for="bonuses">퇴직 전 3개월간 상여금 (원)</label>
+                    <input type="number" id="bonuses" placeholder="상여금을 입력하세요 (없으면 0)">
+                </div>
+                <div class="input-group">
+                    <label for="taxRate">세율 (%)</label>
+                    <input type="number" id="taxRate" placeholder="세율을 입력하세요 (기본값: 3.3)" value="3.3" step="0.1">
+                </div>
+                <button id="calculateRetirement" class="btn btn-primary">계산하기</button>
+                <div id="retirementResult"></div>
+            </div>
         </div>
-        <div class="input-group">
-            <label for="yearsWorked">근무 연수 (년)</label>
-            <input type="number" id="yearsWorked" placeholder="근무 연수를 입력하세요">
-        </div>
-        <div class="input-group">
-            <label for="bonuses">퇴직 전 3개월간 상여금 (원)</label>
-            <input type="number" id="bonuses" placeholder="상여금을 입력하세요 (없으면 0)">
-        </div>
-        <div class="input-group">
-            <label for="taxRate">세율 (%)</label>
-            <input type="number" id="taxRate" placeholder="세율을 입력하세요 (기본값: 3.3)" value="3.3" step="0.1">
-        </div>
-        <button id="calculateRetirement" class="btn btn-primary">계산하기</button>
-        <div id="retirementResult"></div>
-    </div>
-</div>
+
         <!-- 실업급여 계산기 섹션 -->
         <div id="unemploymentCalculator" class="section">
             <h2>실업급여 계산기</h2>
@@ -452,7 +490,30 @@
                 <button id="calculateUnemployment" class="btn btn-primary">계산하기</button>
                 <div id="unemploymentResult"></div>
             </div>
-        </div>        
+        </div>
+
+        <!-- IP 주소 확인 섹션 -->
+        <div id="ipChecker" class="section">
+            <h2>IP 주소 확인</h2>
+            <div class="ip-checker-container">
+                <div class="ip-info-box">
+                    <h3>내 IP 정보</h3>
+                    <div id="ipInfo" class="ip-details">
+                        <p>로딩중...</p>
+                    </div>
+                </div>
+                <button id="refreshIp" class="btn btn-primary">새로고침</button>
+                <div class="ip-description">
+                    <h4>IP 정보 설명</h4>
+                    <ul>
+                        <li>공인 IP: 인터넷에서 사용되는 실제 IP 주소</li>
+                        <li>국가: IP 주소가 등록된 국가</li>
+                        <li>지역: IP 주소가 위치한 지역</li>
+                        <li>ISP: 인터넷 서비스 제공업체</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>

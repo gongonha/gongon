@@ -39,25 +39,26 @@ header {
 #menu button {
     display: block;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 5px;
+    padding: 8px 10px;
+    margin-bottom: 2px;
     border: none;
     border-radius: 4px;
-    background-color: #f8f9fa;
+    background-color: transparent;
     color: #333;
     text-align: left;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 #menu button:hover {
-    background-color: #007bff;
-    color: white;
+    background-color: #e9ecef;
+    padding-left: 15px;
 }
 
 #menu button.active {
     background-color: #007bff;
     color: white;
+    padding-left: 15px;
 }
 
 /* 메인 컨텐츠 영역 */
@@ -1060,7 +1061,7 @@ footer {
         transition: top 0.3s ease-in-out;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         z-index: 998;
-        padding: 10px;
+        padding: 15px;
         overflow-y: auto;
         margin-top: 100px; /* 헤더 + 메뉴버튼 높이 */
     }
@@ -1095,7 +1096,7 @@ footer {
     #menu button {
         width: 100%;
         margin: 5px 0;
-        padding: 12px;
+        padding: 10px;
         text-align: left;
         background-color: #f8f9fa;
         border: 1px solid #dee2e6;
@@ -1179,7 +1180,7 @@ header {
         transition: top 0.3s ease-in-out;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         z-index: 998;
-        padding: 10px;
+        padding: 15px;
         overflow-y: auto;
         margin-top: 100px; /* 헤더 + 메뉴버튼 높이 */
     }
@@ -1214,7 +1215,7 @@ header {
     #menu button {
         width: 100%;
         margin: 5px 0;
-        padding: 12px;
+        padding: 10px;
         text-align: left;
         background-color: #f8f9fa;
         border: 1px solid #dee2e6;
@@ -1286,4 +1287,189 @@ header {
 .version-info p {
     margin-bottom: 10px;
     color: #666;
+}
+
+/* IP 체커 스타일 */
+.ip-checker-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.ip-info-box {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.ip-info-box h3 {
+    color: #007bff;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.ip-details {
+    font-size: 1.1em;
+}
+
+.ip-info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.ip-info-item:last-child {
+    border-bottom: none;
+}
+
+.ip-info-item .label {
+    font-weight: bold;
+    color: #555;
+}
+
+.ip-info-item .value {
+    color: #007bff;
+}
+
+.ip-description {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.ip-description h4 {
+    color: #495057;
+    margin-bottom: 10px;
+}
+
+.ip-description ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.ip-description li {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.error-message {
+    color: #dc3545;
+    text-align: center;
+    padding: 15px;
+    background-color: #f8d7da;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+#refreshIp {
+    width: 100%;
+    margin: 15px 0;
+}
+
+/* 메뉴 그룹 스타일 */
+.menu-group {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.menu-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.menu-group-title {
+    color: #6c757d;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 8px 10px;
+    margin-bottom: 5px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+/* 반응형 스타일 수정 */
+@media screen and (max-width: 768px) {
+    #menu {
+        padding: 15px;
+    }
+
+    .menu-group {
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+
+    .menu-group-title {
+        padding: 6px 8px;
+        font-size: 0.85em;
+    }
+
+    #menu button {
+        padding: 10px;
+        font-size: 0.95em;
+    }
+
+    #menu button:hover,
+    #menu button.active {
+        padding-left: 15px;
+    }
+
+    /* 메뉴가 열렸을 때의 스타일 */
+    #menu.menu-open {
+        max-height: 80vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* iOS 스크롤 개선 */
+    }
+
+    /* 스크롤바 스타일링 */
+    #menu::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    #menu::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    #menu::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 3px;
+    }
+
+    #menu::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+}
+
+/* 메뉴 토글 버튼 스타일 유지 */
+.menu-toggle {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border: none;
+        border-bottom: 1px solid #dee2e6;
+        color: #333;
+        font-size: 1rem;
+        cursor: pointer;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        z-index: 2000;
+    }
+
+    .menu-toggle:hover {
+        background-color: #e9ecef;
+    }
 }

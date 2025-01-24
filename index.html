@@ -21,6 +21,7 @@
     </button>
 
     <nav id="menu" class="menu-closed">
+        <button data-target="main">메인화면</button>
         <button data-target="todo">To-Do 리스트</button>
         <button data-target="qrcode">QR 코드 생성기</button>
         <button data-target="calculator">계산기</button>
@@ -36,6 +37,23 @@
     </nav>
 
     <main>
+        <!-- 메인화면 섹션 -->
+        <div id="main" class="section">
+            <h2>메인화면</h2>
+            <div class="section-description">
+                <div class="search-links">
+                    <a href="https://www.google.com" target="_blank" class="search-link">구글로 이동</a>
+                    <a href="https://www.naver.com" target="_blank" class="search-link">네이버로 이동</a>
+                    <a href="https://www.daum.net" target="_blank" class="search-link">다음으로 이동</a>
+                </div>
+                <div class="version-info">
+                    <h3>v0.1 버전 (2025-01-24)</h3>
+                    <p>편리하게 사무 도구를 이용할 수 있도록 만들었습니다.</p>
+                    <p>예약 프로그램들은 인터넷을 끄지 말고 최소화해놓으면 실행됩니다.</p>
+                </div>
+            </div>
+        </div>
+
         <!-- To-Do 리스트 섹션 -->
         <div id="todo" class="section">
             <h2>To-Do 리스트</h2>

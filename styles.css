@@ -1616,3 +1616,67 @@ header {
     background-color: #f8f9fa;
     border-radius: 4px;
 }
+
+/* URL 단축기 스타일 */
+.url-shortener-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.url-shortener-container .input-group {
+    margin-bottom: 20px;
+}
+
+.url-shortener-container input.full-width {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.service-selection {
+    margin-bottom: 20px;
+}
+
+.service-selection select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.url-result-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+#shortenButton {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+#copyButton {
+    white-space: nowrap;
+    background-color: #6c757d;
+}
+
+#copyButton:hover {
+    background-color: #5a6268;
+}
+
+.result-container {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+#shortUrl {
+    background-color: #f8f9fa;
+}
+
+#shortUrl[readonly] {
+    cursor: default;
+}

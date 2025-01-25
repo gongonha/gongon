@@ -1781,9 +1781,17 @@ footer {
 }
 
 /* 플로팅 버튼 스타일 */
-.floating-button {
+.floating-buttons {
     position: fixed;
     right: 20px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 9999;
+}
+
+.floating-button {
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -1793,16 +1801,14 @@ footer {
     text-decoration: none;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
-    z-index: 9999;
 }
 
 .kakao-button {
-    bottom: 100px;
     background-color: #FEE500;
+    color: #000000;
 }
 
 .twitter-button {
-    bottom: 20px;
     background-color: #000000;
     color: #ffffff;
 }
@@ -1814,11 +1820,6 @@ footer {
 
 .floating-button i {
     font-size: 24px;
-}
-
-.floating-button img {
-    width: 30px;
-    height: 30px;
 }
 
 /* 툴팁 스타일 */
@@ -1843,27 +1844,19 @@ footer {
 
 /* 모바일 반응형 */
 @media screen and (max-width: 768px) {
+    .floating-buttons {
+        right: 15px;
+        bottom: 15px;
+        gap: 10px;
+    }
+
     .floating-button {
         width: 50px;
         height: 50px;
-        right: 15px;
-    }
-
-    .kakao-button {
-        bottom: 80px;
-    }
-
-    .twitter-button {
-        bottom: 15px;
     }
 
     .floating-button i {
         font-size: 20px;
-    }
-
-    .floating-button img {
-        width: 25px;
-        height: 25px;
     }
 }
 

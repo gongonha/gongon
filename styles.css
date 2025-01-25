@@ -1916,3 +1916,19 @@ body .download-link i {
         padding: 15px;
     }
 }
+
+/* 유틸리티 섹션 스타일 */
+body .notice-box {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+body .notice-box p {
+    margin: 0;
+}

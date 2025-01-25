@@ -66,6 +66,7 @@
         <div class="menu-group">
             <div class="menu-group-title">메인</div>
             <button data-target="main">메인화면</button>
+            <button data-target="utility">유틸리티</button>
         </div>
 
         <!-- 일정도구 -->
@@ -128,6 +129,13 @@
                     <a href="https://www.naver.com" target="_blank" class="search-link">네이버로 이동</a>
                     <a href="https://www.daum.net" target="_blank" class="search-link">다음으로 이동</a>
                     <a href="https://pf.kakao.com/_HuaVC" target="_blank" class="search-link">상담하기</a>
+                    <a href="https://x.com/hangjang0125" target="_blank" class="search-link">제작자 트위터</a>
+                </div>
+                <div class="version-info">
+                    <h3>v0.2 버전 (2025-01-25)</h3>
+                    <p>·웹으로 구현이 안되는 것들은 "유틸리티" 메뉴를 만들어 추가하였습니다</p>
+                    <p>·카카오 채널 상담하기를 통해 문의 및 건의사항 등 상담이 가능합니다.</p>
+                    <p>·제작자 트위터 추가하였습니다. 편한 곳으로 문의 주세요</p>
                 </div>
                 <div class="version-info">
                     <h3>v0.1 버전 (2025-01-24)</h3>
@@ -729,6 +737,34 @@
                 </div>
             </div>
         </div>
+
+        <!-- 유틸리티 섹션 -->
+        <div id="utility" class="section">
+            <h2>유틸리티</h2>
+            <div class="utility-container">
+                <div class="download-item">
+                    <h3>톡서랍 드라이브 초기화 프로그램</h3>
+                    <p class="download-description">
+                        톡서랍 전체 선택 삭제가 안되고 수동으로 해야하는데 자꾸 톡서랍 가득 찼다고 해서 화나서 만들었습니다. 
+                        프로그램 실행 후 초기화 할 폴더 또는 전체 선택하여 실행하고, 로그인 후 확인 버튼 누르면 자동 실행 됩니다.
+                    </p>
+                    <a href="http://naver.me/GJTN3OYi" class="download-link" target="_blank">
+                        <i class="fas fa-download"></i> 다운로드
+                    </a>
+                </div>
+
+                <div class="download-item">
+                    <h3>엑셀 보호 해제 프로그램</h3>
+                    <p class="download-description">
+                        시트 보호 해제 및 통합 보호 해제가 가능합니다.
+                        옵션 선택 후, 보호를 해제 할 액셀을 선택하시면 됩니다.
+                    </p>
+                    <a href="http://naver.me/GudFue43" class="download-link" target="_blank">
+                        <i class="fas fa-download"></i> 다운로드
+                    </a>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -740,6 +776,10 @@
     <a href="https://pf.kakao.com/_HuaVC" target="_blank" class="floating-button kakao-button">
         <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png" alt="카카오톡 상담">
         <span class="tooltip">카카오톡 상담</span>
+    </a>
+    <a href="https://x.com/hangjang0125" target="_blank" class="floating-button twitter-button">
+        <i class="fab fa-x-twitter"></i>
+        <span class="tooltip">제작자 트위터</span>
     </a>
 </body>
 </html>

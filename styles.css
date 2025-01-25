@@ -1130,125 +1130,6 @@ footer {
     }
 }
 
-/* 헤더 스타일 수정 */
-header {
-    background-color: #007bff;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-/* 메뉴 토글 버튼 스타일 수정 */
-.menu-toggle {
-    display: none;
-    width: 100%;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border: none;
-    border-bottom: 1px solid #dee2e6;
-    color: #333;
-    font-size: 1rem;
-    cursor: pointer;
-    position: fixed;
-    top: 60px;
-    left: 0;
-    z-index: 2000;
-}
-
-.menu-toggle:hover {
-    background-color: #e9ecef;
-}
-
-/* 반응형 스타일 수정 */
-@media screen and (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-
-    #menu {
-        position: fixed;
-        top: -100%;
-        left: 0;
-        width: 100%;
-        height: auto;
-        max-height: 80vh;
-        background-color: white;
-        transition: top 0.3s ease-in-out;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        z-index: 998;
-        padding: 15px;
-        overflow-y: auto;
-        margin-top: 100px; /* 헤더 + 메뉴버튼 높이 */
-    }
-
-    #menu.menu-open {
-        top: 0;
-    }
-
-    /* 메인 컨텐츠 영역 여백 조정 */
-    main {
-        margin-left: 0;
-        padding-top: 120px; /* 헤더 + 메뉴버튼 높이 + 여유공간 */
-    }
-
-    /* 메뉴 오버레이 수정 */
-    .menu-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.5);
-        z-index: 997;
-    }
-
-    .menu-overlay.active {
-        display: block;
-    }
-
-    /* 메뉴 버튼 스타일 */
-    #menu button {
-        width: 100%;
-        margin: 5px 0;
-        padding: 10px;
-        text-align: left;
-        background-color: #f8f9fa;
-        border: 1px solid #dee2e6;
-        border-radius: 4px;
-    }
-
-    #menu button:hover {
-        background-color: #e9ecef;
-    }
-
-    #menu button.active {
-        background-color: #007bff;
-        color: white;
-    }
-
-    /* 푸터 조정 */
-    footer {
-        margin-left: 0;
-        width: 100%;
-    }
-}
-
-/* 더 작은 화면을 위한 추가 조정 */
-@media screen and (max-width: 480px) {
-    main {
-        padding: 120px 15px 80px 15px; /* 상단 여백 + 좌우 여백 + 하단 여백 */
-    }
-
-    .section {
-        margin-top: 20px;
-    }
-}
-
 /* 검색 링크 스타일 */
 .search-links {
     display: flex;
@@ -1903,10 +1784,8 @@ header {
 .floating-button {
     position: fixed;
     right: 20px;
-    bottom: 20px;
     width: 60px;
     height: 60px;
-    background-color: #FEE500;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1914,7 +1793,18 @@ header {
     text-decoration: none;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
-    z-index: 9999; /* z-index 값을 높임 */
+    z-index: 9999;
+}
+
+.kakao-button {
+    bottom: 100px;
+    background-color: #FEE500;
+}
+
+.twitter-button {
+    bottom: 20px;
+    background-color: #000000;
+    color: #ffffff;
 }
 
 .floating-button:hover {
@@ -1923,8 +1813,12 @@ header {
 }
 
 .floating-button i {
-    font-size: 30px;
-    color: #000000;
+    font-size: 24px;
+}
+
+.floating-button img {
+    width: 30px;
+    height: 30px;
 }
 
 /* 툴팁 스타일 */
@@ -1953,15 +1847,79 @@ header {
         width: 50px;
         height: 50px;
         right: 15px;
+    }
+
+    .kakao-button {
+        bottom: 80px;
+    }
+
+    .twitter-button {
         bottom: 15px;
     }
 
     .floating-button i {
-        font-size: 24px;
+        font-size: 20px;
+    }
+
+    .floating-button img {
+        width: 25px;
+        height: 25px;
     }
 }
 
-.floating-button img {
-    width: 30px;
-    height: 30px;
+/* 유틸리티 섹션 스타일 */
+.utility-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.download-item {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.download-item h3 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.download-description {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.download-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.download-link:hover {
+    background-color: #218838;
+    text-decoration: none;
+    color: white;
+}
+
+.download-link i {
+    margin-right: 8px;
+}
+
+/* 반응형 스타일 */
+@media screen and (max-width: 768px) {
+    .utility-container {
+        padding: 10px;
+    }
+
+    .download-item {
+        padding: 15px;
+    }
 }

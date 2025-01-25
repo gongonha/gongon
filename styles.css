@@ -1861,13 +1861,13 @@ footer {
 }
 
 /* 유틸리티 섹션 스타일 */
-.utility-container {
+body .utility-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
-.download-item {
+body .download-item {
     background-color: #fff;
     border-radius: 8px;
     padding: 20px;
@@ -1875,18 +1875,18 @@ footer {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.download-item h3 {
+body .download-item h3 {
     color: #007bff;
     margin-bottom: 15px;
 }
 
-.download-description {
+body .download-description {
     color: #666;
     margin-bottom: 20px;
     line-height: 1.6;
 }
 
-.download-link {
+body .download-link {
     display: inline-block;
     padding: 10px 20px;
     background-color: #28a745;
@@ -1896,23 +1896,23 @@ footer {
     transition: background-color 0.3s;
 }
 
-.download-link:hover {
+body .download-link:hover {
     background-color: #218838;
     text-decoration: none;
     color: white;
 }
 
-.download-link i {
+body .download-link i {
     margin-right: 8px;
 }
 
 /* 반응형 스타일 */
 @media screen and (max-width: 768px) {
-    .utility-container {
+    body .utility-container {
         padding: 10px;
     }
 
-    .download-item {
+    body .download-item {
         padding: 15px;
     }
 }

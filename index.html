@@ -103,6 +103,7 @@
             <button data-target="salaryCalculator">시급/월급 계산기</button>
             <button data-target="retirementCalculator">퇴직금 계산기</button>
             <button data-target="unemploymentCalculator">실업급여 계산기</button>
+            <button data-target="loanCalculator">이자/대출 계산기</button>
         </div>
 
         <!-- 네트워크 도구 그룹 -->
@@ -120,7 +121,6 @@
             <button data-target="businessCard">디지털 명함 생성기</button>
             <button data-target="urlShortener">URL 단축</button>
         </div>
-
     </nav>
 
     <main>
@@ -151,6 +151,7 @@
                     <p>·상담하기 기능을 삭제하였습니다. 문의 사항은 트위터를 통해서 해주세요</p>
                     <p>·파비콘 생성기 추가하였습니다. 파비콘 생성기를 통해 파비콘을 생성할 수 있습니다.</p>
                     <p>·gif 생성기 추가하였습니다. 여러 이미지를 선택하여 gif를 생성할 수 있습니다.</p>
+                    <p>·이자/대출 계산기 추가하였습니다. 이자/대출 계산기를 통해 이자/대출 계산을 할 수 있습니다.</p>
                 </div>
                 <div class="version-info">
                     <h3>v0.2 버전 (2025-01-25)</h3>
@@ -904,6 +905,53 @@
                 <div class="preview-section">
                     <h3>생성된 GIF</h3>
                     <div id="gifPreview" class="gif-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 이자/대출 계산기 섹션 -->
+        <div id="loanCalculator" class="section">
+            <h2>이자/대출 계산기</h2>
+            <div class="section-description">
+                <p>대출 금액, 이자율, 기간을 입력하여 월 상환금과 총 상환금을 계산할 수 있습니다.</p>
+            </div>
+            
+            <div class="calculator-container">
+                <div class="input-group">
+                    <label for="loanAmount">대출금액 (원)</label>
+                    <input type="number" id="loanAmount" placeholder="예: 100000000">
+                </div>
+                
+                <div class="input-group">
+                    <label for="interestRate">연이자율 (%)</label>
+                    <input type="number" id="interestRate" step="0.1" placeholder="예: 3.5">
+                </div>
+                
+                <div class="input-group">
+                    <label for="loanTerm">대출기간</label>
+                    <div class="term-inputs">
+                        <input type="number" id="loanTermYears" placeholder="년">
+                        <input type="number" id="loanTermMonths" placeholder="개월">
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="repaymentType">상환방식</label>
+                    <select id="repaymentType">
+                        <option value="equal">원리금균등상환</option>
+                        <option value="fixed">원금균등상환</option>
+                        <option value="bullet">만기일시상환</option>
+                    </select>
+                </div>
+                
+                <button id="calculateLoan" class="btn btn-primary">계산하기</button>
+                
+                <div id="loanResult" class="result-container">
+                    <!-- 결과가 여기에 표시됩니다 -->
+                </div>
+                
+                <div id="repaymentSchedule" class="schedule-container">
+                    <!-- 상환 스케줄이 여기에 표시됩니다 -->
                 </div>
             </div>
         </div>

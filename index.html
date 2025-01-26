@@ -1146,9 +1146,16 @@
       const app = initializeApp(firebaseConfig);
       const db = getDatabase(app);
 
+      // 한국 시간으로 오늘 날짜 구하는 함수
+      function getKoreanToday() {
+        const now = new Date();
+        now.setHours(now.getHours() + 9); // UTC+9 적용
+        return now.toISOString().split('T')[0];
+      }
+
       // 방문자 카운터 함수
       async function updateVisitorCount() {
-        const today = new Date().toISOString().split('T')[0];
+        const today = getKoreanToday(); // 기존의 new Date().toISOString().split('T')[0] 대신 사용
         const lastVisit = localStorage.getItem('lastVisit');
         const currentTime = new Date().getTime();
         
@@ -1180,11 +1187,12 @@
             displayVisitorCount();
         } catch (error) {
             console.error('방문자 수 업데이트 실패:', error);
+            await displayVisitorCount();
         }
       }
 
       async function displayVisitorCount() {
-        const today = new Date().toISOString().split('T')[0];
+        const today = getKoreanToday(); // 여기도 한국 시간 적용
         const todayRef = ref(db, `visitors/${today}`);
         const totalRef = ref(db, 'visitors/total');
         

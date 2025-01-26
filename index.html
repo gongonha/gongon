@@ -73,11 +73,39 @@
     </button>
 
     <nav id="menu" class="menu-closed">
+        <!-- 오디오 플레이어 섹션 -->
+        <div id="audioPlayer" class="menu-group">
+            <div class="menu-group-title">배경음악</div>
+            <div class="audio-container">
+                <div class="audio-list">
+                    <select id="audioSelect" class="audio-select">
+                        <option value="">음악 선택</option>
+                        <option value="1">음악 1</option>
+                        <option value="3">음악 3</option>
+                        <option value="5">음악 5</option>
+                        <option value="7">음악 7</option>
+                        <option value="9">음악 9</option>
+                    </select>
+                    <audio id="audioElement" controls>
+                        오디오 플레이어를 지원하지 않는 브라우저입니다.
+                    </audio>
+                </div>
+            </div>
+        </div>
+
         <!-- 메인 메뉴 그룹 -->
         <div class="menu-group">
             <div class="menu-group-title">메인</div>
             <button data-target="main">메인화면</button>
             <button data-target="utility">유틸리티</button>
+            <button data-target="advertise">광고문의</button>
+        </div>
+
+        <!-- 커뮤니티 -->
+        <div class="menu-group">
+            <div class="menu-group-title">커뮤니티</div>
+            <button data-target="infoShare">정보 공유</button>
+            <button data-target="community">직장인 커뮤니티</button>
         </div>
 
         <!-- 일정도구 -->
@@ -140,6 +168,17 @@
                 <div class="main-banner">
                     <img src="img/meta.png" alt="마타리 사무 도구 모음 배너" class="banner-image">
                 </div>
+                <!-- 여기에 방문자 통계 추가 -->
+                <div class="visitor-stats">
+                    <div class="stat-box">
+                        <span class="stat-label">오늘 방문자</span>
+                        <span id="todayVisitors">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">전체 방문자</span>
+                        <span id="totalVisitors">0</span>
+                    </div>
+                </div>
                 <div class="search-links">
                     <a href="https://www.google.com" target="_blank" class="search-link google-link">
                         <i class="fab fa-google"></i>
@@ -157,6 +196,14 @@
                         <i class="fab fa-x-twitter"></i>
                         <span>제작자 트위터</span>
                     </a>
+                </div>
+                <div class="version-info">
+                    <h3>v0.4 버전 (2025-01-27)</h3>
+                    <p>·BGM 듣기 기능이 추가 되었습니다.</p>
+                    <p>·정버 공유 게시글 기능이 추가 되었습니다. 다양한 꿀팁 및 정보가 올라갈 예정입니다</p>
+                    <p>·광고 문의 메뉴가 추가 되었습니다.</p>
+                    <p>·방문자 기록 기능이 추가되었습니다.</p>
+                    <p>·직장인 커뮤니티 메뉴가 추가되었습니다, 트위터 커뮤니티로 연결됩니다.</p>
                 </div>
                 <div class="version-info">
                     <h3>v0.3 버전 (2025-01-26)</h3>
@@ -967,6 +1014,113 @@
                 </div>
             </div>
         </div>
+
+        <!-- 직장인 커뮤니티 섹션 -->
+        <div id="community" class="section">
+            <h2><i class="fab fa-x-twitter"></i> 직장인 커뮤니티</h2>
+            <div class="section-description">
+                <div class="community-header">
+                    <i class="fab fa-x-twitter fa-2x"></i>
+                    <h3>X(트위터) 커뮤니티</h3>
+                </div>
+                <p class="community-intro">직장인들을 위한 X 커뮤니티에 오신 것을 환영합니다.</p>
+                <div class="community-features">
+                    <h4>커뮤니티 특징</h4>
+                    <ul>
+                        <li><i class="fas fa-comments"></i> 실시간으로 다양한 직장인들과 소통</li>
+                        <li><i class="fas fa-lightbulb"></i> 직장 생활 노하우와 경험 공유</li>
+                        <li><i class="fas fa-handshake"></i> 서로의 고민을 나누고 해결책 모색</li>
+                        <li><i class="fas fa-chart-line"></i> 업계 동향과 취업/이직 정보 공유</li>
+                        <li><i class="fas fa-users"></i> 다양한 업종의 직장인들과 네트워킹</li>
+                    </ul>
+                </div>
+                <div class="community-notice">
+                    <h4>참여 방법</h4>
+                    <p>1. X(트위터) 계정으로 로그인</p>
+                    <p>2. '커뮤니티 입장하기' 버튼 클릭</p>
+                    <p>3. 커뮤니티 가입 신청 (자동 승인)</p>
+                    <p>4. 자유롭게 소통 시작!</p>
+                </div>
+                <div class="button-container">
+                    <a href="https://x.com/i/communities/1883523528328425897" target="_blank" class="btn btn-primary">
+                        <i class="fab fa-x-twitter"></i> 커뮤니티 입장하기
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 정보 공유 섹션 -->
+        <div id="infoShare" class="section">
+            <h2>정보 공유</h2>
+            <div class="section-description">
+                <div id="boardContainer">
+                    <!-- 게시글 목록 -->
+                    <div id="boardList" class="board-list">
+                        <!-- 게시글 목록이 여기에 로드됩니다 -->
+                    </div>
+                    <!-- 게시글 상세 보기 -->
+                    <div id="postDetail" class="post-detail" style="display: none;">
+                        <div class="post-header">
+                            <button onclick="showList()" class="back-btn">
+                                <i class="fas fa-arrow-left"></i> 목록으로
+                            </button>
+                            <h3 id="postTitle"></h3>
+                            <div class="post-info">
+                                <span id="postDate" class="post-date"></span>
+                            </div>
+                        </div>
+                        <div id="postBody" class="post-body">
+                            <!-- 게시글 내용이 여기에 로드됩니다 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 광고 문의 섹션 -->
+        <div id="advertise" class="section">
+            <h2>광고 문의</h2>
+            <div class="section-description">
+                <div class="ad-inquiry">
+                    <p class="inquiry-text">
+                        배너 광고 및 제휴 광고 문의는 트위터를 통해서 문의해주시거나<br>
+                        이메일로 연락 주세요.
+                    </p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <a href="https://x.com/haengjang0125" target="_blank" class="twitter-link">
+                                <i class="fab fa-x-twitter"></i> @haengjang0125
+                            </a>
+                        </div>
+                        
+                        <div class="company-info">
+                            <div class="info-row">
+                                <span class="info-label">회사명</span>
+                                <span class="info-value">마타리 크리에이티브</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">이메일</span>
+                                <span class="info-value">matari@kakao.com</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">주소</span>
+                                <span class="info-value">천안시 서북구 두정중 3길 27, 2층</span>
+                            </div>
+                        </div>
+
+                        <div class="map-links">
+                            <a href="https://naver.me/5wW2Vf28" target="_blank" class="map-btn naver">
+                                <i class="fas fa-map-marker-alt"></i> 네이버 지도
+                            </a>
+                            <a href="https://place.map.kakao.com/1082714408" target="_blank" class="map-btn kakao">
+                                <i class="fas fa-map-marker-alt"></i> 카카오 지도
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -981,5 +1135,79 @@
             <span class="tooltip">제작자 트위터</span>
         </a>
     </div>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { getDatabase, ref, set, get, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        databaseURL: "https://matari-f6260-default-rtdb.firebaseio.com"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      // 방문자 카운터 함수
+      async function updateVisitorCount() {
+        const today = new Date().toISOString().split('T')[0];
+        const lastVisit = localStorage.getItem('lastVisit');
+        const currentTime = new Date().getTime();
+        
+        // 마지막 방문 시간 확인
+        if (lastVisit) {
+            const timeDiff = currentTime - parseInt(lastVisit);
+            const hoursDiff = timeDiff / (1000 * 60 * 60); // 시간 단위로 변환
+            
+            // 24시간이 지나지 않았다면 카운트하지 않음
+            if (hoursDiff < 24) {
+                displayVisitorCount(); // 카운트는 하지 않고 표시만 업데이트
+                return;
+            }
+        }
+        
+        const todayRef = ref(db, `visitors/${today}`);
+        const totalRef = ref(db, 'visitors/total');
+        
+        try {
+            // 오늘 방문자 수 증가
+            await set(todayRef, increment(1));
+            // 전체 방문자 수 증가
+            await set(totalRef, increment(1));
+            
+            // 마지막 방문 시간 저장
+            localStorage.setItem('lastVisit', currentTime.toString());
+            
+            // 방문자 수 표시 업데이트
+            displayVisitorCount();
+        } catch (error) {
+            console.error('방문자 수 업데이트 실패:', error);
+        }
+      }
+
+      async function displayVisitorCount() {
+        const today = new Date().toISOString().split('T')[0];
+        const todayRef = ref(db, `visitors/${today}`);
+        const totalRef = ref(db, 'visitors/total');
+        
+        try {
+          const todaySnapshot = await get(todayRef);
+          const totalSnapshot = await get(totalRef);
+          
+          document.getElementById('todayVisitors').textContent = 
+            todaySnapshot.exists() ? todaySnapshot.val() : 0;
+          document.getElementById('totalVisitors').textContent = 
+            totalSnapshot.exists() ? totalSnapshot.val() : 0;
+        } catch (error) {
+          console.error('방문자 수 조회 실패:', error);
+        }
+      }
+
+      // 페이지 로드 시 방문자 수 업데이트
+      updateVisitorCount();
+    </script>
+    <script src="js/board.js"></script>
 </body>
 </html>

@@ -92,6 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 메뉴 토글 기능
     initMenuToggle();
+
+    // 오디오 플레이어 초기화
+    initAudioPlayer();
 });
 
 // 메뉴 토글 기능
@@ -115,5 +118,43 @@ function initMenuToggle() {
                 toggleMenu();
             }
         });
+    });
+}
+
+function initAudioPlayer() {
+    const audioSelect = document.getElementById('audioSelect');
+    const audioElement = document.getElementById('audioElement');
+    
+    const audioUrls = {
+        '1': 'https://blog.kakaocdn.net/dn/DaPnJ/btr4wEGwDDh/MJMRFCWzn2nDUwd6eM9Xlk/1.wav?attach=1&knm=tfile.wav',
+        '3': 'https://blog.kakaocdn.net/dn/0RYD1/btr4WHgHsXe/FvK81Ecf9qe69GfRwt2d9K/3.wav?attach=1&knm=tfile.wav',
+        '5': 'https://blog.kakaocdn.net/dn/bP0lNZ/btr4xiXsGyF/Nuhqrk1thrf0hH4T8W3YoK/5.wav?attach=1&knm=tfile.wav',
+        '7': 'https://blog.kakaocdn.net/dn/bKQk3R/btr4TJseWVN/g5EPpVVfhIAZwKxSXac3G1/7.wav?attach=1&knm=tfile.wav',
+        '9': 'https://blog.kakaocdn.net/dn/bkO4sF/btr4wMqYGIp/KCQQJlDpKA6BL3qvjq38P1/9.wav?attach=1&knm=tfile.wav'
+    };
+
+    audioSelect.addEventListener('change', () => {
+        const selectedValue = audioSelect.value;
+        if (selectedValue && audioUrls[selectedValue]) {
+            audioElement.src = audioUrls[selectedValue];
+            audioElement.play();
+        }
+    });
+
+    // 트랙 종료 시 다음 트랙 자동 재생
+    audioElement.addEventListener('ended', () => {
+        const options = audioSelect.options;
+        let currentIndex = audioSelect.selectedIndex;
+        let nextIndex = (currentIndex + 1) % options.length;
+        
+        // 첫 번째 옵션("음악 선택")을 건너뛰기
+        if (nextIndex === 0) nextIndex = 1;
+        
+        audioSelect.selectedIndex = nextIndex;
+        const nextValue = options[nextIndex].value;
+        if (nextValue && audioUrls[nextValue]) {
+            audioElement.src = audioUrls[nextValue];
+            audioElement.play();
+        }
     });
 }

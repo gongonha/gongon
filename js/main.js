@@ -17,6 +17,8 @@ import { initIpChecker } from "./ipChecker.js";
 import { initTextAnalyzer } from "./textAnalyzer.js";
 import { initUrlShortener } from "./urlShortener.js";
 import { initBusinessCard } from "./businessCard.js";
+import { initFaviconGenerator } from "./faviconGenerator.js";
+import { initGifGenerator } from './gifGenerator.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // PDF 변환 & 타임존 변환 버튼/섹션 제거 (기존 코드에서 제거 처리)
@@ -83,6 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initTextAnalyzer();
     initUrlShortener();
     initBusinessCard();
+    initFaviconGenerator();
+    initGifGenerator();
 
     // 메뉴 토글 기능
     initMenuToggle();

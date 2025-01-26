@@ -1,13 +1,13 @@
 const posts = [
     {
         id: 'labor-law',
-        date: '2024-02-14',
+        date: '2025-01-27',
         title: '2025년 최저시급 및 주요 노동법 변경사항',
         file: 'posts/labor-law.html'
     },
     {
         id: 'year-end-tax',
-        date: '2024-02-14',
+        date: '2025-01-27',
         title: '2025년 연말정산 필수 준비서류',
         file: 'posts/year-end-tax.html'
     }

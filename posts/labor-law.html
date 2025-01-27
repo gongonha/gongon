@@ -1,13 +1,73 @@
-<h4>2025년 최저시급 정보</h4>
-<ul>
-    <li>최저시급: 10,060원</li>
-    <li>월 급여(주 40시간 기준): 2,102,530원</li>
-</ul>
+<head>
+    <!-- Font Awesome 추가 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+    .info-section {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 25px;
+        background-color: #fdfdfd;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #0056b3;
+    }
 
-<h4>주요 변경사항</h4>
-<ul>
-    <li>근로시간 유연화: 선택적 근로시간제 정산기간 확대</li>
-    <li>직장 내 괴롭힘 금지법 처벌 강화</li>
-    <li>중대재해처벌법 적용 대상 확대</li>
-    <li>육아휴직 급여 인상 (통상임금의 80%까지)</li>
-</ul>
+    .info-section h4::before {
+        content: "\f0d7"; /* Font Awesome 아이콘 */
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        left: -30px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #0056b3;
+    }
+
+    .info-section ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .info-section li {
+        background-color: #ffffff;
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        font-size: 1.1em;
+        color: #333;
+        display: flex;
+        align-items: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .info-section li:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .info-section li i {
+        margin-right: 10px;
+        color: #0056b3;
+    }
+</style>
+
+<div class="info-section">
+    <h4>2025년 최저시급 정보</h4>
+    <ul>
+        <li><i class="fas fa-coins"></i> 최저시급: 10,060원</li>
+        <li><i class="fas fa-calendar-alt"></i> 월 급여(주 40시간 기준): 2,102,530원</li>
+    </ul>
+</div>
+
+<div class="info-section">
+    <h4>주요 변경사항</h4>
+    <ul>
+        <li><i class="fas fa-clock"></i> 근로시간 유연화: 선택적 근로시간제 정산기간 확대</li>
+        <li><i class="fas fa-ban"></i> 직장 내 괴롭힘 금지법 처벌 강화</li>
+        <li><i class="fas fa-exclamation-triangle"></i> 중대재해처벌법 적용 대상 확대</li>
+        <li><i class="fas fa-baby"></i> 육아휴직 급여 인상 (통상임금의 80%까지)</li>
+    </ul>
+</div>

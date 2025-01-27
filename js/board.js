@@ -1,5 +1,11 @@
 const posts = [
     {
+        id: 'startup-support',
+        date: '2025-01-27',
+        title: '2025년 창업지원사업 통합 공고',
+        file: 'posts/250127/startup-support.html'
+    },
+    {
         id: 'labor-law',
         date: '2025-01-27',
         title: '2025년 최저시급 및 주요 노동법 변경사항',
@@ -44,6 +50,15 @@ async function loadPost(postId) {
             boardList.style.display = 'none';
             postDetail.style.display = 'block';
             
+            // 동적으로 로드된 스크립트 실행
+            const scriptTags = postDetail.querySelectorAll('script');
+            scriptTags.forEach(script => {
+                const newScript = document.createElement('script');
+                newScript.textContent = script.textContent;
+                document.body.appendChild(newScript);
+                document.body.removeChild(newScript);
+            });
+
             history.pushState({ postId }, '', `#post=${postId}`);
         } catch (error) {
             console.error('게시글 로드 실패:', error);

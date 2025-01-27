@@ -1,22 +1,84 @@
-<h4>2025년 연말정산 주요 변경사항</h4>
-<ul>
-    <li>신용카드 소득공제율 상향 조정</li>
-    <li>전월세 세액공제 한도 확대</li>
-    <li>교육비 세액공제 대상 확대</li>
-</ul>
+<head>
+    <!-- Font Awesome 추가 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+    .tax-section {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 25px;
+        background-color: #fdfdfd;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #007bff;
+    }
 
-<h4>기본 준비서류</h4>
-<ul>
-    <li>소득·세액공제신고서</li>
-    <li>주민등록등본</li>
-    <li>신용카드/현금영수증 사용내역서</li>
-    <li>의료비 지출내역서</li>
-</ul>
+    .tax-section h4::before {
+        content: "\f0d7"; /* Font Awesome 아이콘 */
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        left: -30px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #007bff;
+    }
 
-<h4>추가 공제 관련 서류</h4>
-<ul>
-    <li>주택자금 상환증명서</li>
-    <li>연금저축/퇴직연금 납입증명서</li>
-    <li>기부금 영수증</li>
-    <li>월세 계약서 및 납입증명서</li>
-</ul>
+    .tax-section ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tax-section li {
+        background-color: #ffffff;
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        font-size: 1.1em;
+        color: #333;
+        display: flex;
+        align-items: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .tax-section li:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .tax-section li i {
+        margin-right: 10px;
+        color: #007bff;
+    }
+</style>
+
+<div class="tax-section">
+    <h4>2025년 연말정산 주요 변경사항</h4>
+    <ul>
+        <li><i class="fas fa-credit-card"></i> 신용카드 소득공제율 상향 조정</li>
+        <li><i class="fas fa-home"></i> 전월세 세액공제 한도 확대</li>
+        <li><i class="fas fa-graduation-cap"></i> 교육비 세액공제 대상 확대</li>
+    </ul>
+</div>
+
+<div class="tax-section">
+    <h4>기본 준비서류</h4>
+    <ul>
+        <li><i class="fas fa-file-alt"></i> 소득·세액공제신고서</li>
+        <li><i class="fas fa-id-card"></i> 주민등록등본</li>
+        <li><i class="fas fa-receipt"></i> 신용카드/현금영수증 사용내역서</li>
+        <li><i class="fas fa-notes-medical"></i> 의료비 지출내역서</li>
+    </ul>
+</div>
+
+<div class="tax-section">
+    <h4>추가 공제 관련 서류</h4>
+    <ul>
+        <li><i class="fas fa-home"></i> 주택자금 상환증명서</li>
+        <li><i class="fas fa-piggy-bank"></i> 연금저축/퇴직연금 납입증명서</li>
+        <li><i class="fas fa-hand-holding-heart"></i> 기부금 영수증</li>
+        <li><i class="fas fa-file-contract"></i> 월세 계약서 및 납입증명서</li>
+    </ul>
+</div>

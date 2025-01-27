@@ -2660,3 +2660,48 @@ body .notice-box p {
     background-color: #FEE500;
     color: #000;
 }
+
+/* 급여 정보 박스 스타일 수정 */
+.salary-info-box {
+    background-color: #f8f9fa;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #495057;
+}
+
+.salary-info-box p {
+    margin: 8px 0;
+    font-weight: 500;
+}
+
+.salary-info-box ul {
+    margin: 8px 0;
+    padding-left: 20px;
+    list-style-type: none;
+}
+
+.salary-info-box ul li {
+    position: relative;
+    padding-left: 12px;
+    margin: 6px 0;
+}
+
+.salary-info-box ul li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #2A395A;
+}
+
+/* 기존 체크박스 스타일 유지 */
+.checkbox-wrapper {
+    display: flex;
+    gap: 20px;
+    margin: 15px 0;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}

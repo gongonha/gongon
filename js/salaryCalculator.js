@@ -19,13 +19,8 @@ export function initSalaryCalculator() {
 
     const MINIMUM_WAGE_2025 = 10030; // 2025년 최저시급
 
-    if (
-        !calculatorType || !hourlyForm || !monthlyForm ||
-        !hourlyRateInput || !workHoursInput || !breakTimeInput || !includeBreakCheckbox ||
-        !monthlyRateInput || !monthlyWorkDaysInput || !monthlyWorkHoursInput ||
-        !calculateSalaryBtn || !salaryResult || !breakTimeNotice ||
-        !workDaysPerWeekInput || !includeWeeklyPayCheckbox || !insuranceGradeSelect
-    ) {
+    if (!calculatorType || !hourlyForm || !monthlyForm || !calculateSalaryBtn) {
+        console.error('필수 요소를 찾을 수 없습니다.');
         return;
     }
 
@@ -48,6 +43,15 @@ export function initSalaryCalculator() {
             
             salaryResult.innerHTML = '';
         });
+    });
+
+    // 계산하기 버튼 이벤트 리스너 추가
+    calculateSalaryBtn.addEventListener('click', () => {
+        if (currentCalculationType === 'hourly') {
+            calculateHourlySalary();
+        } else {
+            calculateMonthlySalary();
+        }
     });
 
     // 근무시간 입력 시 휴게시간 안내
@@ -80,15 +84,6 @@ export function initSalaryCalculator() {
         if (days > 7) {
             alert('주 근무일수는 7일을 초과할 수 없습니다.');
             workDaysPerWeekInput.value = 7;
-        }
-    });
-
-    // 계산하기
-    calculateSalaryBtn.addEventListener('click', () => {
-        if (currentCalculationType === 'hourly') {
-            calculateHourlySalary();
-        } else {
-            calculateMonthlySalary();
         }
     });
 
@@ -134,19 +129,21 @@ export function initSalaryCalculator() {
         const monthlyRate = parseFloat(monthlyRateInput.value) || 0;
         const workDays = parseFloat(monthlyWorkDaysInput.value) || 21.75;
         const workHours = parseFloat(monthlyWorkHoursInput.value) || 8;
-        const insuranceGrade = insuranceGradeSelect.value;
 
         if (monthlyRate <= 0) {
             alert('월급을 입력해주세요.');
             return;
         }
 
+        // 고용보험료율 자동 결정 (2025년 기준)
+        const employmentRate = monthlyRate <= 3500000 ? 0.009 : 0.008;
+
         // 4대보험 계산 (2025년 기준)
         const insuranceRates = {
             pension: 0.045, // 국민연금 4.5%
             health: 0.0399, // 건강보험 3.99%
             longTerm: 0.003384, // 장기요양보험 0.3384%
-            employment: insuranceGrade === '1' ? 0.009 : 0.008 // 고용보험 0.9% or 0.8%
+            employment: employmentRate // 고용보험 (월급에 따라 자동 결정)
         };
 
         const deductions = {
@@ -168,7 +165,8 @@ export function initSalaryCalculator() {
             workHours,
             deductions,
             totalDeduction,
-            netSalary
+            netSalary,
+            employmentRate // 표시용으로 추가
         });
     }
 
@@ -232,7 +230,7 @@ export function initSalaryCalculator() {
                         <span>-${Math.round(details.deductions.longTerm).toLocaleString()}원</span>
                     </div>
                     <div class="insurance-item">
-                        <span>고용보험 (0.8~0.9%):</span>
+                        <span>고용보험 (${(details.employmentRate * 100).toFixed(1)}%):</span>
                         <span>-${Math.round(details.deductions.employment).toLocaleString()}원</span>
                     </div>
                     <div class="deduction-total">

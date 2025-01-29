@@ -3296,3 +3296,42 @@ body .notice-box p {
     border-color: #d39e00;
     color: #000;
 }
+
+/* 날짜 표시 스타일 */
+.date-display {
+    display: none;
+    background-color: #e8f4ff;
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: #0056b3;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #0056b3;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.close-button:hover {
+    color: #003d82;
+}
+
+/* 캘린더 날짜 호버 효과 */
+.day {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.day:hover {
+    background-color: #f0f7ff;
+}

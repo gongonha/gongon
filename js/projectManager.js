@@ -94,109 +94,145 @@ export function initProjectManager() {
         const lastDay = new Date(year, month + 1, 0);
         const daysGrid = document.getElementById('calendarDays');
         daysGrid.innerHTML = '';
-
-        // 달력 그리드 생성
-        const totalDays = 42; // 6주 × 7일
+        
         const firstDayIndex = firstDay.getDay();
         const lastDate = lastDay.getDate();
+        const prevLastDay = new Date(year, month, 0);
+        const prevLastDate = prevLastDay.getDate();
 
-        for (let i = 0; i < totalDays; i++) {
+        for (let i = 0; i < 42; i++) {
             const dayDiv = document.createElement('div');
             dayDiv.className = 'day';
             
-            const currentDayDate = i - firstDayIndex + 1;
-            const currentDate = new Date(year, month, currentDayDate);
-            
-            if (i < firstDayIndex || currentDayDate > lastDate) {
-                // 이전/다음 달의 날짜
+            let displayDate;
+            let dateStr;
+
+            if (i < firstDayIndex) {
+                // 이전 달의 날짜
+                const prevMonthDate = prevLastDate - (firstDayIndex - i - 1);
+                displayDate = new Date(year, month - 1, prevMonthDate);
                 dayDiv.className += ' other-month';
-                if (i < firstDayIndex) {
-                    const prevMonthLastDay = new Date(year, month, 0);
-                    dayDiv.textContent = prevMonthLastDay.getDate() - (firstDayIndex - i - 1);
-                } else {
-                    dayDiv.textContent = currentDayDate - lastDate;
-                }
+            } else if (i - firstDayIndex + 1 > lastDate) {
+                // 다음 달의 날짜
+                const nextMonthDate = i - firstDayIndex - lastDate + 1;
+                displayDate = new Date(year, month + 1, nextMonthDate);
+                dayDiv.className += ' other-month';
             } else {
-                // 날짜 컨테이너 생성
-                const dateContainer = document.createElement('div');
-                dateContainer.className = 'date-container';
-                
-                // 날짜 표시
-                const dateNumber = document.createElement('span');
-                dateNumber.className = 'date-number';
-                dateNumber.textContent = currentDayDate;
-                dateContainer.appendChild(dateNumber);
-                
-                // 공휴일 확인 및 표시
-                const holiday = getHoliday(currentDate);
-                if (holiday) {
-                    dayDiv.className += ' holiday';
-                    const holidayName = document.createElement('div');
-                    holidayName.className = 'holiday-name';
-                    holidayName.textContent = holiday;
-                    dateContainer.appendChild(holidayName);
-                }
-                
-                // 일요일인 경우 빨간색으로 표시
-                if (currentDate.getDay() === 0) {
-                    dayDiv.className += ' sunday';
-                }
-                
-                dayDiv.appendChild(dateContainer);
-                
-                // 오늘 날짜 표시
-                const today = new Date();
-                if (year === today.getFullYear() && 
-                    month === today.getMonth() && 
-                    currentDayDate === today.getDate()) {
-                    dayDiv.className += ' today';
-                }
+                // 현재 달의 날짜
+                const currentMonthDate = i - firstDayIndex + 1;
+                displayDate = new Date(year, month, currentMonthDate);
+            }
 
-                // 프로젝트 표시
-                const dayProjects = projects.filter(project => {
-                    const projectDate = new Date(project.dueDate);
-                    return projectDate.getFullYear() === year &&
-                           projectDate.getMonth() === month &&
-                           projectDate.getDate() === currentDayDate;
-                });
+            // toISOString() 대신 직접 날짜 문자열 생성
+            const yyyy = displayDate.getFullYear();
+            const mm = String(displayDate.getMonth() + 1).padStart(2, '0');
+            const dd = String(displayDate.getDate()).padStart(2, '0');
+            dateStr = `${yyyy}-${mm}-${dd}`;
+            dayDiv.setAttribute('data-date', dateStr);
 
-                if (dayProjects.length > 0) {
-                    const projectIndicator = document.createElement('div');
-                    projectIndicator.className = 'project-indicator';
-                    
-                    // 상태별로 프로젝트 분리
-                    const completedProjects = dayProjects.filter(p => p.status === 'completed');
-                    const ongoingProjects = dayProjects.filter(p => p.status === 'ongoing');
-                    const pendingProjects = dayProjects.filter(p => p.status === 'pending');
-                    
-                    // 대기 중인 프로젝트 표시
-                    if (pendingProjects.length > 0) {
-                        const pendingIndicator = document.createElement('div');
-                        pendingIndicator.className = 'indicator-item indicator-pending';
-                        pendingIndicator.textContent = `${pendingProjects.length}`;
-                        projectIndicator.appendChild(pendingIndicator);
-                    }
-                    
-                    // 진행 중인 프로젝트 표시
-                    if (ongoingProjects.length > 0) {
-                        const ongoingIndicator = document.createElement('div');
-                        ongoingIndicator.className = 'indicator-item indicator-ongoing';
-                        ongoingIndicator.textContent = `${ongoingProjects.length}`;
-                        projectIndicator.appendChild(ongoingIndicator);
-                    }
-                    
-                    // 완료된 프로젝트 표시
-                    if (completedProjects.length > 0) {
-                        const completedIndicator = document.createElement('div');
-                        completedIndicator.className = 'indicator-item indicator-completed';
-                        completedIndicator.textContent = `${completedProjects.length}`;
-                        projectIndicator.appendChild(completedIndicator);
-                    }
-                    
-                    dayDiv.appendChild(projectIndicator);
-                }
+            // 날짜 컨테이너 생성
+            const dateContainer = document.createElement('div');
+            dateContainer.className = 'date-container';
+            
+            // 날짜 표시
+            const dateNumber = document.createElement('span');
+            dateNumber.className = 'date-number';
+            dateNumber.textContent = displayDate.getDate();
+            dateContainer.appendChild(dateNumber);
+            
+            // 공휴일 확인 및 표시
+            const holiday = getHoliday(displayDate);
+            if (holiday) {
+                dayDiv.className += ' holiday';
+                const holidayName = document.createElement('div');
+                holidayName.className = 'holiday-name';
+                holidayName.textContent = holiday;
+                dateContainer.appendChild(holidayName);
             }
             
+            // 일요일인 경우 빨간색으로 표시
+            if (displayDate.getDay() === 0) {
+                dayDiv.className += ' sunday';
+            }
+            
+            dayDiv.appendChild(dateContainer);
+            
+            // 오늘 날짜 표시
+            const today = new Date();
+            if (displayDate.getFullYear() === today.getFullYear() && 
+                displayDate.getMonth() === today.getMonth() && 
+                displayDate.getDate() === today.getDate()) {
+                dayDiv.className += ' today';
+            }
+
+            // 프로젝트 표시
+            const dayProjects = projects.filter(project => {
+                const projectDate = new Date(project.dueDate);
+                return projectDate.getFullYear() === displayDate.getFullYear() &&
+                       projectDate.getMonth() === displayDate.getMonth() &&
+                       projectDate.getDate() === displayDate.getDate();
+            });
+
+            if (dayProjects.length > 0) {
+                const projectIndicator = document.createElement('div');
+                projectIndicator.className = 'project-indicator';
+                
+                // 상태별로 프로젝트 분리
+                const completedProjects = dayProjects.filter(p => p.status === 'completed');
+                const ongoingProjects = dayProjects.filter(p => p.status === 'ongoing');
+                const pendingProjects = dayProjects.filter(p => p.status === 'pending');
+                
+                // 대기 중인 프로젝트 표시
+                if (pendingProjects.length > 0) {
+                    const pendingIndicator = document.createElement('div');
+                    pendingIndicator.className = 'indicator-item indicator-pending';
+                    pendingIndicator.textContent = `${pendingProjects.length}`;
+                    projectIndicator.appendChild(pendingIndicator);
+                }
+                
+                // 진행 중인 프로젝트 표시
+                if (ongoingProjects.length > 0) {
+                    const ongoingIndicator = document.createElement('div');
+                    ongoingIndicator.className = 'indicator-item indicator-ongoing';
+                    ongoingIndicator.textContent = `${ongoingProjects.length}`;
+                    projectIndicator.appendChild(ongoingIndicator);
+                }
+                
+                // 완료된 프로젝트 표시
+                if (completedProjects.length > 0) {
+                    const completedIndicator = document.createElement('div');
+                    completedIndicator.className = 'indicator-item indicator-completed';
+                    completedIndicator.textContent = `${completedProjects.length}`;
+                    projectIndicator.appendChild(completedIndicator);
+                }
+                
+                dayDiv.appendChild(projectIndicator);
+            }
+
+            // 날짜 클릭 이벤트
+            dayDiv.addEventListener('click', () => {
+                const clickedDate = dayDiv.getAttribute('data-date');
+                if (clickedDate) {
+                    let selectedDateInput = document.getElementById('selectedDate');
+                    if (!selectedDateInput) {
+                        selectedDateInput = document.createElement('input');
+                        selectedDateInput.type = 'hidden';
+                        selectedDateInput.id = 'selectedDate';
+                        document.querySelector('.project-header').appendChild(selectedDateInput);
+                    }
+                    
+                    // 클릭한 날짜를 그대로 사용
+                    selectedDateInput.value = clickedDate;
+
+                    const [year, month, day] = clickedDate.split('-');
+                    const dateDisplay = document.getElementById('dateDisplay') || createDateDisplay();
+                    dateDisplay.style.display = 'block';
+                    dateDisplay.textContent = `${year}년 ${month}월 ${day}일 프로젝트`;
+
+                    renderProjects();
+                }
+            });
+
             daysGrid.appendChild(dayDiv);
         }
     }
@@ -277,10 +313,24 @@ export function initProjectManager() {
     function renderProjects() {
         const projectList = document.getElementById('projectList');
         const filter = document.getElementById('projectFilter').value;
+        const selectedDate = document.getElementById('selectedDate')?.value;
         
-        const filteredProjects = filter === 'all' 
-            ? projects 
-            : projects.filter(p => p.status === filter);
+        // 프로젝트 정렬 및 필터링
+        let filteredProjects = [...projects].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+        
+        // 상태 필터링
+        if (filter !== 'all') {
+            filteredProjects = filteredProjects.filter(p => p.status === filter);
+        }
+        
+        // 날짜 필터링
+        if (selectedDate) {
+            filteredProjects = filteredProjects.filter(p => {
+                // 프로젝트의 dueDate에서 시간 부분을 제거하고 날짜만 비교
+                const projectDate = p.dueDate.split('T')[0];
+                return projectDate === selectedDate;
+            });
+        }
 
         projectList.innerHTML = filteredProjects.map(project => `
             <div class="project-card ${project.status}">
@@ -440,4 +490,37 @@ function getStatusText(status) {
         completed: '완료'
     };
     return statusMap[status] || status;
+}
+
+// 날짜 표시 요소 생성
+function createDateDisplay() {
+    const dateDisplay = document.createElement('div');
+    dateDisplay.id = 'dateDisplay';
+    dateDisplay.className = 'date-display';
+    
+    // 닫기 버튼 추가
+    const closeButton = document.createElement('button');
+    closeButton.innerHTML = '✕';
+    closeButton.className = 'close-button';
+    closeButton.onclick = clearDateFilter;
+    
+    dateDisplay.appendChild(closeButton);
+    document.querySelector('.project-header').insertBefore(dateDisplay, document.querySelector('.project-controls'));
+    
+    return dateDisplay;
+}
+
+// 날짜 필터 초기화
+function clearDateFilter() {
+    const selectedDateInput = document.getElementById('selectedDate');
+    if (selectedDateInput) {
+        selectedDateInput.value = '';
+    }
+    
+    const dateDisplay = document.getElementById('dateDisplay');
+    if (dateDisplay) {
+        dateDisplay.style.display = 'none';
+    }
+    
+    renderProjects();
 } 

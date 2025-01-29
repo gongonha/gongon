@@ -221,13 +221,21 @@ export function initProjectManager() {
                         document.querySelector('.project-header').appendChild(selectedDateInput);
                     }
                     
-                    // 클릭한 날짜를 그대로 사용
-                    selectedDateInput.value = clickedDate;
-
-                    const [year, month, day] = clickedDate.split('-');
-                    const dateDisplay = document.getElementById('dateDisplay') || createDateDisplay();
-                    dateDisplay.style.display = 'block';
-                    dateDisplay.textContent = `${year}년 ${month}월 ${day}일 프로젝트`;
+                    // 같은 날짜를 다시 클릭한 경우 필터 해제
+                    if (selectedDateInput.value === clickedDate) {
+                        selectedDateInput.value = '';
+                        const dateDisplay = document.getElementById('dateDisplay');
+                        if (dateDisplay) {
+                            dateDisplay.style.display = 'none';
+                        }
+                    } else {
+                        // 새로운 날짜 선택
+                        selectedDateInput.value = clickedDate;
+                        const [year, month, day] = clickedDate.split('-');
+                        const dateDisplay = document.getElementById('dateDisplay') || createDateDisplay();
+                        dateDisplay.style.display = 'block';
+                        dateDisplay.textContent = `${year}년 ${month}월 ${day}일 프로젝트`;
+                    }
 
                     renderProjects();
                 }

@@ -21,6 +21,8 @@ import { initFaviconGenerator } from "./faviconGenerator.js";
 import { initGifGenerator } from './gifGenerator.js';
 import { initLoanCalculator } from './loanCalculator.js';
 import { initProjectManager } from './projectManager.js';
+import { initMemoTool } from "./memoTool.js";
+import { initTextEncryption } from './textEncryption.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // PDF 변환 & 타임존 변환 버튼/섹션 제거 (기존 코드에서 제거 처리)
@@ -92,11 +94,18 @@ document.addEventListener('DOMContentLoaded', () => {
     initLoanCalculator();
     initProjectManager();
 
+    // 메모 도구 초기화를 setTimeout으로 지연
+    setTimeout(() => {
+        initMemoTool();
+    }, 100);
+
     // 메뉴 토글 기능
     initMenuToggle();
 
     // 오디오 플레이어 초기화
     initAudioPlayer();
+
+    initTextEncryption();
 });
 
 // 메뉴 토글 기능

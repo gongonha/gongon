@@ -59,6 +59,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" type="image/x-icon" href="img/logo.ico">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js"></script>
 </head>
 <body>
     <amp-auto-ads type="adsense"
@@ -119,9 +120,11 @@
         <!-- 문서 도구 그룹 -->
         <div class="menu-group">
             <div class="menu-group-title">문서 도구</div>
+            <button data-target="memoTool">메모 기능</button>
             <button data-target="pdfTools">PDF 도구</button>
             <button data-target="textCompare">텍스트 비교</button>
             <button data-target="textAnalyzer">글자 분석기</button>
+            <button data-target="textEncryption">텍스트 암호화</button>
         </div>
 
         <!-- 변환 도구 그룹 -->
@@ -193,6 +196,12 @@
                         <i class="fas fa-d"></i>
                         <span>다음으로 이동</span>
                     </a>
+                </div>
+                <div class="version-info">
+                    <h3>v0.6 버전 (2025-01-31)</h3>
+                    <p>·메모 기능과 메모 검색 기능이 추가되었습니다.</p>
+                    <p>·텍스트 암호화 기능이 추가 되었습니다.</p>
+                    <p>·디자인 스타일 관련 버그를 일부 수정하였습니다</p>
                 </div>
                 <div class="version-info">
                     <h3>v0.5 버전 (2025-01-29)</h3>
@@ -1173,6 +1182,96 @@
                         </select>
                     </div>
                     <div id="projectList" class="project-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 메모장 섹션 -->
+        <div id="memoTool" class="section">
+            <h2>메모장</h2>
+            <div class="memo-container">
+                <div class="memo-sidebar">
+                    <div class="group-controls">
+                        <button id="addGroup" class="btn btn-primary">
+                            <i class="fas fa-folder-plus"></i> 새 그룹
+                        </button>
+                    </div>
+                    <div id="groupList" class="group-list">
+                        <!-- 그룹 목록이 여기에 렌더링됩니다 -->
+                    </div>
+                </div>
+                <div class="memo-main">
+                    <div class="memo-header">
+                        <h3 id="currentGroupName">그룹을 선택해주세요</h3>
+                        <div class="memo-search">
+                            <input type="text" id="memoSearch" placeholder="검색..." class="search-input">
+                        </div>
+                        <div class="memo-controls">
+                            <button id="addMemo" class="btn btn-primary" disabled>
+                                <i class="fas fa-plus"></i> 새 메모
+                            </button>
+                            <button id="exportMemos" class="btn btn-success" disabled>
+                                <i class="fas fa-file-export"></i> CSV 내보내기
+                            </button>
+                            <input type="file" id="importMemos" accept=".csv" style="display: none;">
+                            <label for="importMemos" class="btn btn-info" id="importLabel" style="opacity: 0.5; pointer-events: none;">
+                                <i class="fas fa-file-import"></i> CSV 가져오기
+                            </label>
+                        </div>
+                    </div>
+                    <div id="memoList" class="memo-list">
+                        <!-- 메모 목록이 여기에 렌더링됩니다 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 텍스트 암호화 섹션 -->
+        <div id="textEncryption" class="section">
+            <h2>텍스트 암호화</h2>
+            <div class="section-description">
+                <p>나만의 비밀 텍스트를 만들어보세요</p>
+                <ul>
+                    <li>텍스트를 입력하면 암호화된 텍스트와 복호화 키가 생성됩니다.</li>
+                    <li>복호화 키를 입력하면 원래 텍스트를 확인할 수 있습니다.</li>
+                    <li>키는 안전한 곳에 보관하세요.</li>
+                </ul>
+            </div>
+            <div class="encryption-container">
+                <div class="encryption-section">
+                    <h3>암호화</h3>
+                    <textarea id="encryptInput" placeholder="암호화할 텍스트를 입력하세요" class="text-input"></textarea>
+                    <button id="encryptBtn" class="btn btn-primary">암호화하기</button>
+                    <div id="encryptResult" class="result-box">
+                        <div class="result-group">
+                            <label>암호화된 텍스트:</label>
+                            <div class="copy-group">
+                                <input type="text" id="encryptedText" readonly>
+                                <button class="copy-btn" data-target="encryptedText">복사</button>
+                            </div>
+                        </div>
+                        <div class="result-group">
+                            <label>복호화 키:</label>
+                            <div class="copy-group">
+                                <input type="text" id="decryptionKey" readonly>
+                                <button class="copy-btn" data-target="decryptionKey">복사</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="encryption-section">
+                    <h3>복호화</h3>
+                    <div class="input-group">
+                        <input type="text" id="decryptInput" placeholder="암호화된 텍스트를 입력하세요" class="text-input">
+                        <input type="text" id="keyInput" placeholder="복호화 키를 입력하세요" class="text-input">
+                    </div>
+                    <button id="decryptBtn" class="btn btn-secondary">복호화하기</button>
+                    <div id="decryptResult" class="result-box">
+                        <div class="result-group">
+                            <label>원본 텍스트:</label>
+                            <textarea id="decryptedText" readonly></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

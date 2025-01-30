@@ -457,9 +457,37 @@
   
   /* CSV 컨트롤 스타일 */
   .csv-controls {
+    margin-top: 10px;
     display: flex;
+    flex-direction: column;
     gap: 10px;
-    margin-left: auto;
+  }
+  
+  .csv-controls button,
+  .csv-controls label {
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .csv-controls button:hover,
+  .csv-controls label:hover {
+    background-color: #5a6268;
+  }
+  
+  #currentGroupName {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
   }
   
   .csv-controls input[type="file"] {
@@ -3751,6 +3779,18 @@
     border-radius: 6px;
     resize: vertical;
     font-family: inherit;
+    line-height: 1.5;
+  }
+  
+  /* 메모 공지사항 스타일 */
+  .memo-notice {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 0.95em;
     line-height: 1.5;
   }
   

@@ -4108,3 +4108,217 @@
     color: #666;
   }
   
+  .number-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .number-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .row-number {
+    min-width: 60px;
+    font-weight: bold;
+    color: #495057;
+  }
+  
+  .number-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 5px;
+  }
+  
+  .auto-select-row,
+  .reset-row {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+  }
+  
+  .auto-select-row {
+    background-color: #4C6EF5;
+    color: white;
+  }
+  
+  .reset-row {
+    background-color: #FA5252;
+    color: white;
+  }
+  
+  .selection-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .number-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+  
+    .row-number {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+  
+    .number-grid {
+        grid-template-columns: repeat(7, 1fr);
+    }
+  }
+  
+  /* 선택된 번호 표시 스타일 개선 */
+  .game-numbers {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #dee2e6;
+  }
+  
+  .game-label {
+    font-weight: bold;
+    color: #4C6EF5;
+    margin-right: 10px;
+  }
+  
+  .numbers {
+    color: #495057;
+  }
+  
+  /* 번호 버튼 선택 상태 스타일 개선 */
+  .number-grid button {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .number-grid button.selected {
+    background: #4C6EF5;
+    color: white;
+    border-color: #4C6EF5;
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+  }
+  
+  .number-grid button.selected::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .number-grid button.selected:hover::after {
+    transform: scale(1);
+  }
+  
+  /* 당첨 정보 스타일 개선 */
+  .match-info {
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    margin: 5px 0;
+  }
+  
+  .match-info div {
+    margin: 5px 0;
+  }
+  
+  .game-number {
+    font-weight: bold;
+    color: #4C6EF5;
+  }
+  
+  .selected-numbers-summary {
+    margin-top: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .selected-numbers-summary h4 {
+    margin-bottom: 15px;
+    color: #495057;
+  }
+  
+  .game-row {
+    padding: 8px;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .game-row:last-child {
+    border-bottom: none;
+  }
+  
+  .game-label {
+    font-weight: bold;
+    color: #4C6EF5;
+    margin-right: 10px;
+  }
+  
+  .stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .stats-table th,
+  .stats-table td {
+    padding: 12px;
+    border: 1px solid #dee2e6;
+    text-align: left;
+  }
+  
+  .stats-table th {
+    background: #f8f9fa;
+    font-weight: bold;
+  }
+  
+  .match-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .week-number {
+    color: #666;
+    font-size: 0.9em;
+  }
+  
+  .more-matches {
+    color: #666;
+    font-size: 0.9em;
+    margin-top: 8px;
+    font-style: italic;
+  }
+  
+  .match-info {
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    margin: 8px 0;
+    border: 1px solid #dee2e6;
+  }
+  
+  .match-info:hover {
+    background: #e9ecef;
+  }
+  

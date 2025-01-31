@@ -1282,9 +1282,19 @@
             </div>
             <div class="lotto-container">
                 <div class="number-selection">
-                    <div class="number-grid"></div>
-                    <button id="autoSelect" class="btn btn-primary">자동 선택</button>
-                    <button id="resetNumbers" class="btn btn-danger">초기화</button>
+                    <div class="number-rows">
+                        <!-- 여기에 동적으로 번호 선택 줄이 추가됩니다 -->
+                        <div class="number-row">
+                            <div class="row-number">1게임</div>
+                            <div class="number-grid"></div>
+                            <button class="auto-select-row">자동선택</button>
+                            <button class="reset-row">초기화</button>
+                        </div>
+                    </div>
+                    <div class="selection-controls">
+                        <button id="autoSelect" class="btn btn-primary">전체 자동</button>
+                        <button id="resetNumbers" class="btn btn-danger">전체 초기화</button>
+                    </div>
                 </div>
                 <div class="game-controls">
                     <div class="input-group">

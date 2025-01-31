@@ -15,18 +15,23 @@ export function initLottoCalculator() {
     for (let i = 1; i <= 45; i++) {
         const button = document.createElement('button');
         button.textContent = i;
-        button.addEventListener('click', () => toggleNumber(i, button));
+        button.addEventListener('click', () => toggleNumber(button, 0));
         numberGrid.appendChild(button);
     }
 
     // 번호 토글
-    function toggleNumber(num, button) {
-        if (selectedNumbers.has(num)) {
-            selectedNumbers.delete(num);
+    function toggleNumber(button, gameIndex) {
+        const grid = button.closest('.number-grid');
+        const num = parseInt(button.textContent);
+        
+        if (button.classList.contains('selected')) {
             button.classList.remove('selected');
-        } else if (selectedNumbers.size < 6) {
-            selectedNumbers.add(num);
-            button.classList.add('selected');
+        } else {
+            // 해당 줄에서 선택된 번호 개수 확인
+            const selectedCount = grid.querySelectorAll('.selected').length;
+            if (selectedCount < 6) {
+                button.classList.add('selected');
+            }
         }
         updateSelectedNumbers();
     }
@@ -64,14 +69,35 @@ export function initLottoCalculator() {
 
     // 선택된 번호 표시 업데이트
     function updateSelectedNumbers() {
-        const numbers = Array.from(selectedNumbers).sort((a, b) => a - b);
-        selectedNumbersDiv.innerHTML = `선택된 번호: ${numbers.join(', ')}`;
+        const gameCount = parseInt(document.getElementById('gameCount').value);
+        let html = '';
+        
+        for (let i = 0; i < gameCount; i++) {
+            const numbers = Array.from(document.querySelectorAll(`.number-rows .number-row:nth-child(${i + 1}) .selected`))
+                .map(button => parseInt(button.textContent))
+                .sort((a, b) => a - b);
+                
+            html += `<div class="game-numbers">
+                <span class="game-label">${i + 1}게임:</span>
+                <span class="numbers">${numbers.join(', ') || '번호를 선택해주세요'}</span>
+            </div>`;
+        }
+        
+        selectedNumbersDiv.innerHTML = html;
+    }
+
+    // 특정 게임의 선택된 번호 가져오기
+    function getSelectedNumbersFromRow(gameIndex) {
+        const row = document.querySelectorAll('.number-row')[gameIndex];
+        return Array.from(row.querySelectorAll('.number-grid button.selected'))
+            .map(button => parseInt(button.textContent))
+            .sort((a, b) => a - b);
     }
 
     // 시뮬레이션 시작
     startSimulationBtn.addEventListener('click', async () => {
-        if (selectedNumbers.size !== 6) {
-            alert('6개의 번호를 선택해주세요.');
+        const selectedNumbersList = validateNumbers();
+        if (!selectedNumbersList) {
             return;
         }
 
@@ -79,7 +105,6 @@ export function initLottoCalculator() {
         const simulationCount = document.querySelector('.simulation-count');
         loadingScreen.style.display = 'flex';
         
-        const myNumbers = Array.from(selectedNumbers).sort((a, b) => a - b);
         const gameCount = parseInt(gameCountInput.value);
         
         // 시뮬레이션 타입 확인
@@ -90,7 +115,7 @@ export function initLottoCalculator() {
         // 비동기로 시뮬레이션 실행
         const results = await new Promise(resolve => {
             setTimeout(() => {
-                const results = simulateLotto(myNumbers, gameCount, maxGames, (count) => {
+                const results = simulateLotto(selectedNumbersList, gameCount, maxGames, (count) => {
                     simulationCount.textContent = `${count.toLocaleString()}회 진행`;
                 }, simulationType === 'untilWin');
                 resolve(results);
@@ -102,13 +127,13 @@ export function initLottoCalculator() {
     });
 
     // 로또 시뮬레이션 함수 수정
-    function simulateLotto(myNumbers, gameCount, maxGames, updateCount, untilFirstWin) {
+    function simulateLotto(selectedNumbersList, gameCount, maxGames, updateCount, untilFirstWin) {
         const results = {
-            1: { count: 0, lastMatch: null },
-            2: { count: 0, lastMatch: null },
-            3: { count: 0, lastMatch: null },
-            4: { count: 0, lastMatch: null },
-            5: { count: 0, lastMatch: null }
+            1: { count: 0, matches: [] },
+            2: { count: 0, matches: [] },
+            3: { count: 0, matches: [] },
+            4: { count: 0, matches: [] },
+            5: { count: 0, matches: [] }
         };
 
         let games = 0;
@@ -117,6 +142,11 @@ export function initLottoCalculator() {
 
         while (games < maxGames) {
             weeks++;
+            const winningNumbers = generateWinningNumbers();
+            const bonusNumber = generateBonusNumber(winningNumbers);
+            let hasFirstPrize = false;
+
+            // 한 회차의 모든 게임을 확인
             for (let i = 0; i < gameCount; i++) {
                 games++;
                 
@@ -126,24 +156,33 @@ export function initLottoCalculator() {
 
                 if (games > maxGames && !untilFirstWin) break;
 
-                const winningNumbers = generateWinningNumbers();
-                const bonusNumber = generateBonusNumber(winningNumbers);
+                const myNumbers = selectedNumbersList[i];
                 const matchCount = countMatches(myNumbers, winningNumbers);
                 const rank = getLottoRank(matchCount, myNumbers.includes(bonusNumber));
 
                 if (rank > 0) {
                     results[rank].count++;
-                    results[rank].lastMatch = {
-                        winningNumbers,
+                    // 최근 100개의 당첨 정보만 저장
+                    results[rank].matches.unshift({
+                        winningNumbers: [...winningNumbers],
                         bonusNumber,
-                        matchCount
-                    };
+                        matchCount,
+                        myNumbers: [...myNumbers],
+                        gameIndex: i,
+                        week: weeks
+                    });
+                    if (results[rank].matches.length > 100) {
+                        results[rank].matches.pop();
+                    }
                     
-                    // 1등이 나왔고 1등까지 시뮬레이션하는 경우 종료
-                    if (rank === 1 && untilFirstWin) {
-                        return { results, games, weeks };
+                    if (rank === 1) {
+                        hasFirstPrize = true;
                     }
                 }
+            }
+            
+            if (hasFirstPrize && untilFirstWin) {
+                return { results, games, weeks };
             }
         }
         return { results, games, weeks };
@@ -191,13 +230,12 @@ export function initLottoCalculator() {
         let html = `<h4>시뮬레이션 결과</h4>`;
         html += `<p>총 ${games.toLocaleString()}회 (${totalCost.toLocaleString()}원) / ${years}년 소요</p>`;
 
-        // 등수별 통계 테이블 생성
         html += `<table class="stats-table">
             <tr>
                 <th>등수</th>
                 <th>당첨 횟수</th>
                 <th>확률</th>
-                <th>당첨 정보</th>
+                <th>최근 당첨 정보</th>
             </tr>`;
 
         for (let rank = 1; rank <= 5; rank++) {
@@ -210,11 +248,25 @@ export function initLottoCalculator() {
                 <td>${probability}%</td>
                 <td>`;
 
-            if (result.lastMatch) {
-                const { winningNumbers, bonusNumber, matchCount } = result.lastMatch;
-                html += `당첨번호: ${winningNumbers.join(', ')} 
-                        ${rank === 2 ? `+ [${bonusNumber}]` : ''}<br>
-                        일치하는 번호: ${matchCount}개`;
+            if (result.matches.length > 0) {
+                result.matches.slice(0, 3).forEach(match => {
+                    html += `<div class="match-info">
+                        <div class="match-header">
+                            <span class="game-number">${match.gameIndex + 1}번 게임</span>
+                            <span class="week-number">(${match.week.toLocaleString()}회차)</span>
+                        </div>
+                        <div>내 번호: ${match.myNumbers.join(', ')}</div>
+                        <div>당첨번호: ${match.winningNumbers.join(', ')} 
+                            ${rank === 2 ? `+ [${match.bonusNumber}]` : ''}</div>
+                        <div>일치하는 번호: ${match.matchCount}개</div>
+                    </div>`;
+                });
+
+                // 전체 당첨 횟수와 표시된 횟수의 차이를 정확히 계산
+                const remainingCount = result.count - 3;
+                if (remainingCount > 0) {
+                    html += `<div class="more-matches">외 ${remainingCount.toLocaleString()}회 더 있음</div>`;
+                }
             } else {
                 html += '당첨 이력 없음';
             }
@@ -223,6 +275,20 @@ export function initLottoCalculator() {
         }
 
         html += `</table>`;
+
+        html += `<div class="selected-numbers-summary">
+            <h4>선택한 번호</h4>`;
+        
+        const gameCount = parseInt(document.getElementById('gameCount').value);
+        for (let i = 0; i < gameCount; i++) {
+            const numbers = getSelectedNumbersFromRow(i);
+            html += `<div class="game-row">
+                <span class="game-label">${i + 1}번 게임:</span>
+                <span class="numbers">${numbers.join(', ')}</span>
+            </div>`;
+        }
+        
+        html += `</div>`;
         statisticsDiv.innerHTML = html;
     }
 
@@ -244,4 +310,122 @@ export function initLottoCalculator() {
         // 초기 상태 설정
         updateMaxGamesVisibility();
     });
+
+    // 게임 수에 따라 번호 선택 줄 생성
+    function updateNumberRows(gameCount) {
+        const numberRows = document.querySelector('.number-rows');
+        numberRows.innerHTML = ''; // 기존 줄 초기화
+
+        for (let i = 0; i < gameCount; i++) {
+            const row = document.createElement('div');
+            row.className = 'number-row';
+            row.innerHTML = `
+                <div class="row-number">${i + 1}게임</div>
+                <div class="number-grid"></div>
+                <button class="auto-select-row">자동선택</button>
+                <button class="reset-row">초기화</button>
+            `;
+            numberRows.appendChild(row);
+
+            // 번호 그리드 생성
+            const grid = row.querySelector('.number-grid');
+            for (let num = 1; num <= 45; num++) {
+                const button = document.createElement('button');
+                button.textContent = num;
+                button.addEventListener('click', () => toggleNumber(button, i));
+                grid.appendChild(button);
+            }
+
+            // 자동선택 버튼 이벤트
+            row.querySelector('.auto-select-row').addEventListener('click', () => autoSelectRow(i));
+            // 초기화 버튼 이벤트
+            row.querySelector('.reset-row').addEventListener('click', () => resetRow(i));
+        }
+    }
+
+    // 특정 게임의 자동 선택 함수
+    function autoSelectRow(gameIndex) {
+        const row = document.querySelectorAll('.number-row')[gameIndex];
+        const buttons = row.querySelectorAll('.number-grid button');
+        
+        // 먼저 모든 선택 초기화
+        buttons.forEach(button => button.classList.remove('selected'));
+        
+        // 6개의 랜덤 번호 선택
+        const numbers = new Set();
+        while (numbers.size < 6) {
+            const randomNum = Math.floor(Math.random() * 45) + 1;
+            numbers.add(randomNum);
+        }
+        
+        // 선택된 번호에 클래스 추가
+        numbers.forEach(num => {
+            buttons[num - 1].classList.add('selected');
+        });
+        
+        updateSelectedNumbers();
+    }
+
+    // 특정 게임의 초기화 함수
+    function resetRow(gameIndex) {
+        const row = document.querySelectorAll('.number-row')[gameIndex];
+        const buttons = row.querySelectorAll('.number-grid button');
+        buttons.forEach(button => button.classList.remove('selected'));
+        updateSelectedNumbers();
+    }
+
+    // 전체 자동 선택 버튼 이벤트
+    document.getElementById('autoSelect').addEventListener('click', () => {
+        const gameCount = parseInt(document.getElementById('gameCount').value);
+        for (let i = 0; i < gameCount; i++) {
+            autoSelectRow(i);
+        }
+    });
+
+    // 전체 초기화 버튼 이벤트
+    document.getElementById('resetNumbers').addEventListener('click', () => {
+        const gameCount = parseInt(document.getElementById('gameCount').value);
+        for (let i = 0; i < gameCount; i++) {
+            resetRow(i);
+        }
+    });
+
+    // 각 행의 자동선택과 초기화 버튼에 이벤트 리스너 추가
+    function addRowButtonListeners() {
+        const rows = document.querySelectorAll('.number-row');
+        rows.forEach((row, index) => {
+            row.querySelector('.auto-select-row').addEventListener('click', () => autoSelectRow(index));
+            row.querySelector('.reset-row').addEventListener('click', () => resetRow(index));
+        });
+    }
+
+    // 게임 수 변경 시 이벤트 리스너 수정
+    document.getElementById('gameCount').addEventListener('change', function() {
+        const count = parseInt(this.value);
+        if (count >= 1 && count <= 5) {
+            updateNumberRows(count);
+            addRowButtonListeners(); // 새로운 행에 이벤트 리스너 추가
+            document.getElementById('totalPrice').textContent = (count * 1000).toLocaleString();
+        }
+    });
+
+    // 초기 이벤트 리스너 설정
+    addRowButtonListeners();
+
+    // 시뮬레이션 시작 전 선택된 번호 검증
+    function validateNumbers() {
+        const gameCount = parseInt(document.getElementById('gameCount').value);
+        const selectedNumbers = [];
+        
+        for (let i = 0; i < gameCount; i++) {
+            const rowNumbers = getSelectedNumbersFromRow(i);
+            if (rowNumbers.length !== 6) {
+                alert(`${i + 1}번째 게임에서 6개의 번호를 선택해주세요.`);
+                return null;
+            }
+            selectedNumbers.push(rowNumbers);
+        }
+        
+        return selectedNumbers;
+    }
 } 

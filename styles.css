@@ -3794,3 +3794,317 @@
     line-height: 1.5;
   }
   
+  /* 로또 확률 계산기 스타일 */
+  .lotto-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .number-selection {
+    margin-bottom: 20px;
+  }
+  
+  .number-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .number-grid button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #dee2e6;
+    background: #f8f9fa;
+    color: #495057;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+  }
+  
+  .number-grid button:hover {
+    background: #e9ecef;
+    border-color: #ced4da;
+  }
+  
+  .number-grid button.selected {
+    background: #4C6EF5;  /* 선택된 번호의 배경색 */
+    color: white;         /* 선택된 번호의 글자색 */
+    border-color: #4C6EF5;
+    transform: scale(1.05);  /* 살짝 커지는 효과 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);  /* 그림자 효과 */
+  }
+  
+  .game-controls {
+    margin-bottom: 20px;
+  }
+  
+  .price-info {
+    margin-left: 15px;
+    color: #dc3545;
+    font-weight: bold;
+  }
+  
+  .simulation-results {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .selected-numbers {
+    margin: 15px 0;
+    padding: 10px;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+  }
+  
+  .winning-info {
+    margin: 15px 0;
+  }
+  
+  .statistics {
+    display: grid;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .stat-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 15px;
+    padding: 10px;
+    background: white;
+    border-radius: 4px;
+    align-items: center;
+  }
+  
+  .stat-rank {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .stat-numbers {
+    color: #666;
+  }
+  
+  .stat-time {
+    color: #28a745;
+    font-weight: 500;
+  }
+  
+  @media (max-width: 768px) {
+    .number-grid {
+        grid-template-columns: repeat(7, 1fr);
+    }
+    
+    .number-grid button {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9em;
+    }
+  }
+  
+  /* 로딩 화면 스타일 추가 */
+  .loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .loading-content {
+    text-align: center;
+    color: white;
+  }
+  
+  .loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+  }
+  
+  .loading-text {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .simulation-count {
+    font-size: 1.1em;
+    color: #3498db;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* 시뮬레이션 옵션 스타일 개선 */
+  .simulation-options {
+    margin: 15px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+  }
+  
+  .option-group {
+    margin-bottom: 15px;
+  }
+  
+  .option-group > label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: bold;
+    color: #495057;
+  }
+  
+  .radio-group {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+  }
+  
+  .radio-group:hover {
+    background: #f8f9fa;
+  }
+  
+  .radio-group input[type="radio"] {
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+  
+  .radio-group label {
+    margin-right: 15px;
+    cursor: pointer;
+    font-size: 0.95em;
+    color: #495057;
+    flex: 1;
+  }
+  
+  .radio-group input[type="number"] {
+    width: 120px;
+    padding: 6px 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.95em;
+    margin: 0 8px;
+  }
+  
+  .radio-group input[type="number"]:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  }
+  
+  .games-label {
+    color: #6c757d;
+    font-size: 0.95em;
+  }
+  
+  /* 선택된 라디오 버튼 그룹 스타일 */
+  .radio-group input[type="radio"]:checked + label {
+    color: #007bff;
+    font-weight: 500;
+  }
+  
+  .radio-group:has(input[type="radio"]:checked) {
+    background: #e8f4ff;
+    border-color: #b8daff;
+  }
+  
+  /* 로또 번호 추천 스타일 */
+  .lotto-recommend-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .recommend-controls {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+  }
+  
+  .recommend-results {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .recommended-numbers {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    justify-content: center;
+  }
+  
+  .recommended-number {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #4C6EF5;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  
+  .number-statistics {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .stat-item {
+    background: white;
+    padding: 10px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .stat-number {
+    font-weight: bold;
+    color: #4C6EF5;
+  }
+  
+  .stat-count {
+    color: #666;
+  }
+  

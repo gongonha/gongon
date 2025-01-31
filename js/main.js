@@ -23,6 +23,8 @@ import { initLoanCalculator } from './loanCalculator.js';
 import { initProjectManager } from './projectManager.js';
 import { initMemoTool } from "./memoTool.js";
 import { initTextEncryption } from './textEncryption.js';
+import { initLottoCalculator } from './lottoCalculator.js';
+import { initLottoRecommend } from './lottoRecommend.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // PDF 변환 & 타임존 변환 버튼/섹션 제거 (기존 코드에서 제거 처리)
@@ -106,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initAudioPlayer();
 
     initTextEncryption();
+
+    initLottoCalculator();
+    initLottoRecommend();
 });
 
 // 메뉴 토글 기능

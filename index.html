@@ -21,14 +21,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- 기본 메타 정보 -->
-    <meta name="description" content="마타리 사무 도구 모음 - PDF 도구, QR코드 생성, 계산기, 단위 변환, 디지털 명함 생성 등 다양한 사무 도구를 제공합니다.">
-    <meta name="keywords" content="마타리, 사무도구, PDF도구, QR코드, 계산기, 단위변환, 디지털명함, 사무자동화, 이자/대출 계산기, 퇴직금 계산기, 실업급여 계산기, 시급/월급 계산기, 네트워크 속도 테스트, IP 주소 확인, SEO 분석 도구, 파일 메타데이터 뷰어, 디지털 명함 생성기, URL 단축기, 파비콘 생성기, GIF 생성기">
+    <meta name="description" content="마타리 사무 도구 모음 - PDF 도구, QR코드 생성, 계산기, 단위 변환, 디지털 명함 생성, 메모 기능, 프로젝트 캘린더, To-Do 리스트, 텍스트 암호화, 로또 확률 계산, 로또 번호 추천, 직장인 커뮤니티 등 다양한 사무 도구를 제공합니다.">
+    <meta name="keywords" content="마타리, 사무도구, PDF도구, QR코드, 계산기, 단위변환, 디지털명함, 사무자동화, 이자/대출 계산기, 퇴직금 계산기, 실업급여 계산기, 시급/월급 계산기, 네트워크 속도 테스트, IP 주소 확인, SEO 분석 도구, 파일 메타데이터 뷰어, 디지털 명함 생성기, URL 단축기, 파비콘 생성기, GIF 생성기, 로또 확률 계산, 로또 번호 추천, 프로젝트 캘린더, To-Do 리스트, 메모 기능, 텍스트 비교, 텍스트 분석기, 텍스트 암호화, 이미지 압축기, 정보 공유, 직장인 커뮤니티, 예약 이동">
     <meta name="author" content="마타리">
     
     <!-- Open Graph 메타 태그 -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="마타리 사무 도구 모음">
-    <meta property="og:description" content="PDF 도구, QR코드 생성, 계산기, 단위 변환, 디지털 명함 생성 등 다양한 사무 도구를 제공합니다.">
+    <meta property="og:description" content="PDF 도구, QR코드 생성, 계산기, 단위 변환, 디지털 명함 생성, 메모 기능, 프로젝트 캘린더, To-Do 리스트, 텍스트 암호화, 로또 확률 계산, 로또 번호 추천, 직장인 커뮤니티 등 다양한 사무 도구를 제공합니다.">
     <meta property="og:image" content="img/meta.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="675">
@@ -36,7 +36,7 @@
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="마타리 사무 도구 모음">
-    <meta name="twitter:description" content="PDF 도구, QR코드 생성, 계산기, 단위 변환, 디지털 명함 생성 등 다양한 사무 도구를 제공합니다.">
+    <meta name="twitter:description" content="PDF 도구, QR코드 생성, 계산기, 단위 변환, 디지털 명함 생성, 메모 기능, 프로젝트 캘린더, To-Do 리스트, 텍스트 암호화, 로또 확률 계산, 로또 번호 추천, 직장인 커뮤니티 등 다양한 사무 도구를 제공합니다.">
     <meta name="twitter:image" content="img/meta.png">
     
     <!-- 모바일 최적화 -->
@@ -155,6 +155,13 @@
             <button data-target="seoAnalyzer">SEO 분석 도구</button>
         </div>
 
+         <!-- 재미 도구 그룹 -->
+        <div class="menu-group">
+              <div class="menu-group-title">재미</div>
+             <button data-target="lottoCalculator">로또 확률 계산</button>
+              <button data-target="lottoRecommend">로또 번호 추천</button>
+         </div>
+
         <!-- 기타 도구 -->
         <div class="menu-group">
             <div class="menu-group-title">기타 도구</div>
@@ -202,6 +209,8 @@
                     <p>·메모 기능과 메모 검색 기능이 추가되었습니다.</p>
                     <p>·텍스트 암호화 기능이 추가 되었습니다.</p>
                     <p>·디자인 스타일 관련 버그를 일부 수정하였습니다</p>
+                    <p>·재미 메뉴가 추가되었습니다 (v0.6.1)</p>
+                    <p>·로또 번호 추천과 로또 확률 계산기가 추가되었습니다</p>
                 </div>
                 <div class="version-info">
                     <h3>v0.5 버전 (2025-01-29)</h3>
@@ -1261,6 +1270,88 @@
                             <textarea id="decryptedText" readonly></textarea>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 로또 확률 계산 섹션 -->
+        <div id="lottoCalculator" class="section">
+            <h2>로또 확률 계산</h2>
+            <div class="section-description">
+                <p>로또 번호를 선택하고 시뮬레이션을 통해 당첨 확률을 계산해보세요.</p>
+            </div>
+            <div class="lotto-container">
+                <div class="number-selection">
+                    <div class="number-grid"></div>
+                    <button id="autoSelect" class="btn btn-primary">자동 선택</button>
+                    <button id="resetNumbers" class="btn btn-danger">초기화</button>
+                </div>
+                <div class="game-controls">
+                    <div class="input-group">
+                        <label for="gameCount">구매할 게임 수:</label>
+                        <input type="number" id="gameCount" min="1" max="5" value="1">
+                        <span class="price-info">총 구매금액: <span id="totalPrice">1,000</span>원</span>
+                    </div>
+                    <div class="simulation-options">
+                        <div class="option-group">
+                            <label>시뮬레이션 방식:</label>
+                            <div class="radio-group">
+                                <input type="radio" id="fixedGames" name="simulationType" value="fixed" checked>
+                                <label for="fixedGames">지정된 횟수만큼</label>
+                                <input type="number" id="maxGames" value="1000000" min="1000">
+                                <span class="games-label">회</span>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="untilFirstWin" name="simulationType" value="untilWin">
+                                <label for="untilFirstWin">1등이 될 때까지</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="startSimulation" class="btn btn-success">시뮬레이션 시작</button>
+                </div>
+                <!-- 로딩 화면 추가 -->
+                <div class="loading-screen" style="display: none;">
+                    <div class="loading-content">
+                        <div class="loading-spinner"></div>
+                        <div class="loading-text">시뮬레이션 진행 중...</div>
+                        <div class="simulation-count">0회 진행</div>
+                    </div>
+                </div>
+                <div class="simulation-results">
+                    <h3>시뮬레이션 결과</h3>
+                    <div class="selected-numbers"></div>
+                    <div class="winning-info"></div>
+                    <div class="statistics"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 로또 번호 추천 섹션 -->
+        <div id="lottoRecommend" class="section">
+            <h2>로또 번호 추천</h2>
+            <div class="section-description">
+                <p>AI가 분석한 로또 번호를 추천해드립니다.</p>
+            </div>
+            <div class="lotto-recommend-container">
+                <div class="recommend-controls">
+                    <div class="input-group">
+                        <label for="spinCount">번호 돌릴 횟수:</label>
+                        <input type="number" id="spinCount" min="100" max="1000000" value="10000">
+                        <button id="startRecommend" class="btn btn-primary">번호 돌리기</button>
+                    </div>
+                </div>
+                <!-- 로딩 화면 -->
+                <div class="loading-screen" style="display: none;">
+                    <div class="loading-content">
+                        <div class="loading-spinner"></div>
+                        <div class="loading-text">번호 분석 중...</div>
+                        <div class="simulation-count">0회 진행</div>
+                    </div>
+                </div>
+                <div class="recommend-results">
+                    <h3>추천 번호</h3>
+                    <div class="recommended-numbers"></div>
+                    <div class="number-statistics"></div>
                 </div>
             </div>
         </div>

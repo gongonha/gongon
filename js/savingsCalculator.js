@@ -59,7 +59,7 @@ export function initSavingsCalculator() {
         let months = 0;
         let totalDeposit = 0;
 
-        while (balance < targetAmount && months < 600) {
+        while (balance < targetAmount) {
             balance = balance * (1 + monthlyRate);
             balance += monthlyDeposit;
             totalDeposit += monthlyDeposit;

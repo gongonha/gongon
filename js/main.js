@@ -25,6 +25,7 @@ import { initTextEncryption } from './textEncryption.js';
 import { initLottoCalculator } from './lottoCalculator.js';
 import { initLottoRecommend } from './lottoRecommend.js';
 import { initSavingsCalculator } from './savingsCalculator.js';
+import { initFoodRecommend } from './foodRecommend.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // PDF 변환 & 타임존 변환 버튼/섹션 제거 (기존 코드에서 제거 처리)
@@ -112,6 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initLottoRecommend();
 
     initSavingsCalculator();
+
+    initFoodRecommend();
 });
 
 // 메뉴 토글 기능

@@ -16,7 +16,6 @@ import { initUnemploymentCalculator } from "./unemploymentCalculator.js";
 import { initIpChecker } from "./ipChecker.js";
 import { initTextAnalyzer } from "./textAnalyzer.js";
 import { initUrlShortener } from "./urlShortener.js";
-import { initBusinessCard } from "./businessCard.js";
 import { initFaviconGenerator } from "./faviconGenerator.js";
 import { initGifGenerator } from './gifGenerator.js';
 import { initLoanCalculator } from './loanCalculator.js';
@@ -91,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initIpChecker();
     initTextAnalyzer();
     initUrlShortener();
-    initBusinessCard();
     initFaviconGenerator();
     initGifGenerator();
     initLoanCalculator();

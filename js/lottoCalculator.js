@@ -224,11 +224,22 @@ export function initLottoCalculator() {
     // 결과 표시 함수 수정
     function displayResults(data) {
         const { results, games, weeks } = data;
-        const years = (weeks / 52).toFixed(1);
+        // 1년 = 52주이므로, 정확한 연도 계산
+        const years = Math.floor(weeks / 52);
+        const remainingWeeks = weeks % 52;
+        let timeString = '';
+        
+        if (years > 0) {
+            timeString += `${years}년 `;
+        }
+        if (remainingWeeks > 0) {
+            timeString += `${remainingWeeks}주`;
+        }
+        
         const totalCost = games * 1000;
 
         let html = `<h4>시뮬레이션 결과</h4>`;
-        html += `<p>총 ${games.toLocaleString()}회 (${totalCost.toLocaleString()}원) / ${years}년 소요</p>`;
+        html += `<p>총 ${games.toLocaleString()}회 (${totalCost.toLocaleString()}원) / ${timeString} 소요</p>`;
 
         html += `<table class="stats-table">
             <tr>

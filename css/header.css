@@ -1,0 +1,58 @@
+.main-header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 0.8rem 0 !important;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin: 0 !important;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main, .container, #content {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* 반응형에서 h2 여백 조정 */
+@media (max-width: 768px) {
+    h2 {
+        margin: 2.5rem 0 1.5rem;  /* 상단 여백 대폭 증가, 하단도 약간 증가 */
+        padding: 0 1.5rem;  /* 좌우 여백 증가 */
+        font-size: 1.5rem;  /* 글자 크기도 조정 */
+    }
+    
+    .section {
+        padding: 1.5rem;  /* 섹션 전체 여백 증가 */
+        margin-top: 1rem;  /* 섹션 상단 여백 추가 */
+    }
+
+    /* 첫 번째 섹션은 상단 여백 더 크게 */
+    .section:first-of-type {
+        margin-top: 2rem;
+    }
+} 

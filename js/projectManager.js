@@ -76,12 +76,29 @@ export function initProjectManager() {
     window.toggleProjectStatus = function(projectId, newStatus) {
         const project = projects.find(p => p.id === projectId);
         if (project) {
+            // 상태 업데이트
             project.status = newStatus;
             localStorage.setItem('projects', JSON.stringify(projects));
-            renderProjects();
+            
+            // 캘린더 업데이트를 먼저 수행
             renderCalendar();
+            
+            // 프로젝트 목록 업데이트
+            renderProjects();
+            
+            // 개별 프로젝트 카드 업데이트
+            const projectCard = document.querySelector(`.project-card[data-project-id="${projectId}"]`);
+            if (projectCard) {
+                projectCard.className = `project-card ${newStatus}`;
+                projectCard.querySelectorAll('.status-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                projectCard.querySelector(`.status-btn.${newStatus}`).classList.add('active');
+            }
         }
     };
+
+    let selectedDate = null; // 전역 변수로 선택된 날짜 추가
 
     function renderCalendar() {
         const year = currentDate.getFullYear();
@@ -210,36 +227,7 @@ export function initProjectManager() {
             }
 
             // 날짜 클릭 이벤트
-            dayDiv.addEventListener('click', () => {
-                const clickedDate = dayDiv.getAttribute('data-date');
-                if (clickedDate) {
-                    let selectedDateInput = document.getElementById('selectedDate');
-                    if (!selectedDateInput) {
-                        selectedDateInput = document.createElement('input');
-                        selectedDateInput.type = 'hidden';
-                        selectedDateInput.id = 'selectedDate';
-                        document.querySelector('.project-header').appendChild(selectedDateInput);
-                    }
-                    
-                    // 같은 날짜를 다시 클릭한 경우 필터 해제
-                    if (selectedDateInput.value === clickedDate) {
-                        selectedDateInput.value = '';
-                        const dateDisplay = document.getElementById('dateDisplay');
-                        if (dateDisplay) {
-                            dateDisplay.style.display = 'none';
-                        }
-                    } else {
-                        // 새로운 날짜 선택
-                        selectedDateInput.value = clickedDate;
-                        const [year, month, day] = clickedDate.split('-');
-                        const dateDisplay = document.getElementById('dateDisplay') || createDateDisplay();
-                        dateDisplay.style.display = 'block';
-                        dateDisplay.textContent = `${year}년 ${month}월 ${day}일 프로젝트`;
-                    }
-
-                    renderProjects();
-                }
-            });
+            dayDiv.addEventListener('click', () => handleDateClick(dayDiv, dateStr));
 
             daysGrid.appendChild(dayDiv);
         }
@@ -320,52 +308,91 @@ export function initProjectManager() {
 
     function renderProjects() {
         const projectList = document.getElementById('projectList');
-        const filter = document.getElementById('projectFilter').value;
-        const selectedDate = document.getElementById('selectedDate')?.value;
+        const filterValue = document.getElementById('projectFilter').value;
         
-        // 프로젝트 정렬 및 필터링
-        let filteredProjects = [...projects].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-        
-        // 상태 필터링
-        if (filter !== 'all') {
-            filteredProjects = filteredProjects.filter(p => p.status === filter);
+        let filteredProjects = projects;
+        if (filterValue !== 'all') {
+            filteredProjects = filteredProjects.filter(project => project.status === filterValue);
         }
         
-        // 날짜 필터링
         if (selectedDate) {
-            filteredProjects = filteredProjects.filter(p => {
-                // 프로젝트의 dueDate에서 시간 부분을 제거하고 날짜만 비교
-                const projectDate = p.dueDate.split('T')[0];
+            filteredProjects = filteredProjects.filter(project => {
+                const projectDate = project.dueDate.split('T')[0];
                 return projectDate === selectedDate;
             });
         }
 
         projectList.innerHTML = filteredProjects.map(project => `
-            <div class="project-card ${project.status}">
-                <div class="project-header">
-                    <h4>${project.name}</h4>
-                    <div class="project-actions">
-                        ${project.status === 'completed' ? `
-                            <button onclick="toggleProjectStatus(${project.id}, 'ongoing')" class="btn btn-warning">진행중으로 변경</button>
-                            <button onclick="toggleProjectStatus(${project.id}, 'pending')" class="btn btn-secondary">대기로 변경</button>
-                        ` : project.status === 'ongoing' ? `
-                            <button onclick="toggleProjectStatus(${project.id}, 'completed')" class="btn btn-success">완료하기</button>
-                            <button onclick="toggleProjectStatus(${project.id}, 'pending')" class="btn btn-secondary">대기로 변경</button>
-                        ` : `
-                            <button onclick="toggleProjectStatus(${project.id}, 'ongoing')" class="btn btn-primary">진행하기</button>
-                            <button onclick="toggleProjectStatus(${project.id}, 'completed')" class="btn btn-success">완료하기</button>
-                        `}
-                        <button onclick="editProject(${project.id})" class="btn btn-light">수정</button>
-                        <button onclick="deleteProject(${project.id})" class="btn btn-danger">삭제</button>
-                    </div>
-                </div>
+            <div class="project-card ${project.status}" data-project-id="${project.id}">
+                <h4>${project.name}</h4>
                 <p>${project.description}</p>
                 <div class="project-footer">
                     <span class="due-date">마감: ${new Date(project.dueDate).toLocaleDateString()}</span>
-                    <span class="status">${getStatusText(project.status)}</span>
+                    <div class="status-buttons">
+                        <button onclick="toggleProjectStatus(${project.id}, 'pending')" 
+                                class="status-btn pending ${project.status === 'pending' ? 'active' : ''}">
+                            대기
+                        </button>
+                        <button onclick="toggleProjectStatus(${project.id}, 'ongoing')" 
+                                class="status-btn ongoing ${project.status === 'ongoing' ? 'active' : ''}">
+                            진행중
+                        </button>
+                        <button onclick="toggleProjectStatus(${project.id}, 'completed')" 
+                                class="status-btn completed ${project.status === 'completed' ? 'active' : ''}">
+                            완료
+                        </button>
+                    </div>
                 </div>
             </div>
         `).join('');
+
+        updateDateDisplay();
+    }
+
+    // 날짜 표시 업데이트 함수
+    function updateDateDisplay() {
+        const dateDisplay = document.getElementById('dateDisplay');
+        if (selectedDate) {
+            if (!dateDisplay) {
+                createDateDisplay();
+            }
+            document.getElementById('dateDisplay').innerHTML = `
+                선택된 날짜: ${selectedDate}
+                <button onclick="clearDateFilter()" class="clear-date">×</button>
+            `;
+            document.getElementById('dateDisplay').style.display = 'block';
+        } else if (dateDisplay) {
+            dateDisplay.style.display = 'none';
+        }
+    }
+
+    // 날짜 필터 초기화
+    function clearDateFilter() {
+        selectedDate = null;
+        const previousSelected = document.querySelector('.day.selected');
+        if (previousSelected) {
+            previousSelected.classList.remove('selected');
+        }
+        renderProjects();
+    }
+
+    // 캘린더 날짜 클릭 이벤트 핸들러 수정
+    function handleDateClick(dayDiv, dateStr) {
+        const previousSelected = document.querySelector('.day.selected');
+        if (previousSelected) {
+            previousSelected.classList.remove('selected');
+        }
+        
+        if (selectedDate === dateStr) {
+            // 같은 날짜를 다시 클릭하면 필터 해제
+            selectedDate = null;
+        } else {
+            // 새로운 날짜 선택
+            selectedDate = dateStr;
+            dayDiv.classList.add('selected');
+        }
+        
+        renderProjects();
     }
 
     // 이벤트 리스너 설정
@@ -448,11 +475,20 @@ export function initProjectManager() {
         const projectHeader = document.querySelector('.project-header');
         projectHeader.innerHTML = `
             <div class="project-notice">
-                <p class="notice-text">※ 로컬 환경에 저장하기 때문에 인터넷 기록을 삭제하면 내용이 없어질 수 있습니다. CSV내보내기와 CSV 가져오기 기능으로 내용을 백업하고 유지하세요.</p>
+                <p class="notice-text">※ 로컬 환경에 저장하기 때문에 인터넷 기록을 삭제하면 내용이 없어질 수 있습니다.</p>
                 <div class="status-legend">
-                    <span class="status-item pending">대기</span>
-                    <span class="status-item ongoing">진행중</span>
-                    <span class="status-item completed">완료</span>
+                    <span class="status-item">
+                        <span class="status-color pending"></span>
+                        대기
+                    </span>
+                    <span class="status-item">
+                        <span class="status-color ongoing"></span>
+                        진행중
+                    </span>
+                    <span class="status-item">
+                        <span class="status-color completed"></span>
+                        완료
+                    </span>
                 </div>
             </div>
             <div class="project-controls">
@@ -518,17 +554,11 @@ function createDateDisplay() {
     return dateDisplay;
 }
 
-// 날짜 필터 초기화
-function clearDateFilter() {
-    const selectedDateInput = document.getElementById('selectedDate');
-    if (selectedDateInput) {
-        selectedDateInput.value = '';
-    }
-    
-    const dateDisplay = document.getElementById('dateDisplay');
-    if (dateDisplay) {
-        dateDisplay.style.display = 'none';
-    }
-    
-    renderProjects();
+function getNextStatus(currentStatus) {
+    const statusMap = {
+        pending: 'ongoing',
+        ongoing: 'completed',
+        completed: 'pending'
+    };
+    return statusMap[currentStatus] || 'pending';
 } 

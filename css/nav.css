@@ -1,0 +1,332 @@
+.menu-group {
+    margin: 4px 0;
+}
+
+.menu-group-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+    color: #202124;
+    font-size: 0.95em;
+    font-weight: 500;
+    border-radius: 0 24px 24px 0;
+    margin-right: 8px;
+    letter-spacing: 0.2px;
+}
+
+.menu-group-title:hover {
+    background: rgba(32, 33, 36, 0.039);
+}
+
+.menu-group-title i {
+    font-size: 0.9em;
+    color: #5f6368;
+    transition: all 0.2s ease;
+}
+
+.menu-group-title.collapsed i {
+    transform: rotate(90deg);
+}
+
+.menu-group-title:not(.collapsed) i {
+    transform: rotate(0deg);
+}
+
+.menu-group-content {
+    overflow: hidden;
+    transition: height 0.2s ease-out;
+    height: auto;
+    display: block;
+}
+
+.menu-group-content.collapsed {
+    height: 0;
+    display: none;
+}
+
+.menu-group-content button {
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px 12px 50px;
+    border: none;
+    background: transparent;
+    color: #3c4043;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.875em;
+    border-radius: 0 24px 24px 0;
+    margin: 2px 8px 2px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    box-shadow: 0 0 0 0 rgba(26, 115, 232, 0);
+}
+
+.menu-group-content button:hover {
+    background: rgba(32, 33, 36, 0.059);
+    color: #1967d2;
+    box-shadow: 0 1px 3px rgba(60, 64, 67, 0.05);
+}
+
+.menu-group-content button.active {
+    background: #e8f0fe;
+    color: #1a73e8;
+    font-weight: 500;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(26, 115, 232, 0.15);
+}
+
+/* 오디오 플레이어 특별 스타일 */
+#audioPlayer .menu-group-content {
+    padding: 0 16px;
+}
+
+.audio-container {
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    margin: 0;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    .menu-group-title {
+        padding: 12px 16px;
+    }
+    
+    .menu-group-content button {
+        padding: 12px 16px 12px 50px;
+    }
+    
+    #bgmPlayer {
+        padding: 12px;
+    }
+    
+    .audio-container {
+        max-width: none;
+    }
+}
+
+/* 메뉴 구분선 */
+.menu-group:not(:last-child) {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+
+/* 메뉴 아이콘 스타일 */
+.menu-group-title span {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 활성화된 메뉴 그룹 스타일 */
+.menu-group-title:has(+ .menu-group-content:not(.collapsed)) {
+    color: #1a73e8;
+}
+
+.menu-group-title:has(+ .menu-group-content:not(.collapsed)) i {
+    color: #1a73e8;
+}
+
+/* 메뉴 버튼 아이콘 스타일 */
+.menu-group-content button::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.7;
+    transition: all 0.2s;
+}
+
+.menu-group-content button:hover::before {
+    opacity: 0.9;
+}
+
+.menu-group-content button.active::before {
+    opacity: 1;
+}
+
+/* 버튼 리플 효과 */
+.menu-group-content button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(26, 115, 232, 0.1);
+    border-radius: 0 24px 24px 0;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.2s;
+}
+
+.menu-group-content button:active::after {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.1s;
+}
+
+/* 메뉴 그룹 제목 스타일 개선 */
+.menu-group-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+    color: #202124;
+    font-size: 0.95em;
+    font-weight: 500;
+    border-radius: 0 24px 24px 0;
+    margin-right: 8px;
+    letter-spacing: 0.2px;
+}
+
+.menu-group-title:hover {
+    background: rgba(32, 33, 36, 0.039);
+}
+
+/* 구분선 스타일 개선 */
+.menu-group:not(:last-child) {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+
+/* 호버 효과 부드럽게 */
+.menu-group-content button,
+.menu-group-title {
+    transition: all 0.15s ease-in-out;
+}
+
+/* 아이콘 크기 및 색상 조정 */
+.menu-group-title i {
+    font-size: 0.9em;
+    color: #5f6368;
+    transition: all 0.2s ease;
+}
+
+/* 배경음악 플레이어 스타일 */
+#bgmPlayer {
+    padding: 0 16px 16px 16px;
+    margin: 0 0 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.audio-container {
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    margin: 0;
+}
+
+/* 불필요한 스타일 제거 */
+/* 아래 스타일을 삭제합니다 */
+#bgmPlayer .menu-group-content,
+#bgmPlayer .menu-group-title i {
+    display: none;
+}
+
+/* 메뉴 토글 버튼 스타일 */
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    background: none;
+    color: #333;
+    border: none;
+    padding: 1.2rem 1rem;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    width: auto;
+}
+
+/* 모바일 메뉴 스타일 */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: inline-block;
+        height: auto;
+    }
+
+    #menu {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 280px;
+        background: white;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        padding-top: 50px;
+    }
+
+    #menu.menu-open {
+        transform: translateX(0);
+    }
+}
+
+/* 메뉴 배경 오버레이 */
+@media (max-width: 768px) {
+    .menu-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.3);
+        z-index: 999;
+    }
+
+    #menu.menu-open + .menu-overlay {
+        display: block;
+    }
+}
+
+/* 메뉴 그룹 첫번째 여백 제거 */
+.menu-group:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* 메뉴 그룹 전체 여백 조정 */
+.menu-group {
+    margin: 4px 0;
+}
+
+/* 메뉴 그룹 제목 패딩 조정 */
+.menu-group-title {
+    padding: 8px 16px;
+}
+
+/* 오디오 컨테이너 여백 조정 */
+.audio-container {
+    margin-top: 0;
+} 

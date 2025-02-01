@@ -1,0 +1,153 @@
+/* 게시판 컨테이너 */
+#boardContainer {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+/* 게시글 목록 스타일 */
+.board-list {
+    width: 100%;
+}
+
+.board-item {
+    border-bottom: 1px solid #eee;
+    transition: all 0.2s ease;
+}
+
+.board-item:last-child {
+    border-bottom: none;
+}
+
+.board-item a {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.2s ease;
+}
+
+.board-item a:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+}
+
+.post-date {
+    flex: 0 0 120px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.post-title {
+    flex: 1;
+    font-weight: 500;
+}
+
+/* 게시글 상세 보기 스타일 */
+.post-detail {
+    background: #fff;
+    border-radius: 8px;
+}
+
+.post-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+    background-color: #e9ecef;
+    transform: translateX(-2px);
+}
+
+.back-btn i {
+    font-size: 0.9em;
+}
+
+.post-header h3 {
+    margin: 15px 0;
+    font-size: 1.5em;
+    color: #2A395A;
+}
+
+.post-info {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.post-body {
+    padding: 30px;
+    line-height: 1.8;
+    color: #333;
+}
+
+/* 게시글 내용 스타일 */
+.post-body h1, 
+.post-body h2, 
+.post-body h3 {
+    margin: 1.5em 0 0.8em;
+    color: #2A395A;
+}
+
+.post-body p {
+    margin-bottom: 1em;
+}
+
+.post-body ul, 
+.post-body ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+.post-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 1em 0;
+}
+
+/* 반응형 스타일 */
+@media screen and (max-width: 768px) {
+    #boardContainer {
+        padding: 15px;
+    }
+
+    .board-item a {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+        gap: 5px;
+    }
+
+    .post-date {
+        flex: none;
+    }
+
+    .post-header {
+        padding: 15px;
+    }
+
+    .post-header h3 {
+        font-size: 1.3em;
+    }
+
+    .post-body {
+        padding: 20px 15px;
+    }
+} 

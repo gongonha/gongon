@@ -11,6 +11,16 @@ export function initUnitConverter() {
     const conversions = {
         length: {
             units: ['mm', 'cm', 'm', 'km', 'in', 'ft', 'yd', 'mi'],
+            labels: {
+                'mm': 'mm (밀리미터)',
+                'cm': 'cm (센티미터)',
+                'm': 'm (미터)',
+                'km': 'km (킬로미터)',
+                'in': 'in (인치)',
+                'ft': 'ft (피트)',
+                'yd': 'yd (야드)',
+                'mi': 'mi (마일)'
+            },
             ratios: {
                 mm: 1,
                 cm: 10,
@@ -24,6 +34,13 @@ export function initUnitConverter() {
         },
         weight: {
             units: ['mg', 'g', 'kg', 'oz', 'lb'],
+            labels: {
+                'mg': 'mg (밀리그램)',
+                'g': 'g (그램)',
+                'kg': 'kg (킬로그램)',
+                'oz': 'oz (온스)',
+                'lb': 'lb (파운드)'
+            },
             ratios: {
                 mg: 1,
                 g: 1000,
@@ -34,6 +51,11 @@ export function initUnitConverter() {
         },
         temperature: {
             units: ['°C', '°F', 'K'],
+            labels: {
+                '°C': '°C (섭씨)',
+                '°F': '°F (화씨)',
+                'K': 'K (켈빈)'
+            },
             convert: (value, from, to) => {
                 let celsius;
                 switch(from) {
@@ -50,6 +72,15 @@ export function initUnitConverter() {
         },
         area: {
             units: ['mm²', 'cm²', 'm²', 'km²', 'in²', 'ft²', 'ac'],
+            labels: {
+                'mm²': 'mm² (제곱밀리미터)',
+                'cm²': 'cm² (제곱센티미터)',
+                'm²': 'm² (제곱미터)',
+                'km²': 'km² (제곱킬로미터)',
+                'in²': 'in² (제곱인치)',
+                'ft²': 'ft² (제곱피트)',
+                'ac': 'ac (에이커)'
+            },
             ratios: {
                 'mm²': 1,
                 'cm²': 100,
@@ -72,13 +103,14 @@ export function initUnitConverter() {
     function updateUnits() {
         const type = conversionType.value;
         const units = conversions[type].units;
+        const labels = conversions[type].labels;
         
         fromUnit.innerHTML = units.map(unit => 
-            `<option value="${unit}">${unit}</option>`
+            `<option value="${unit}">${labels[unit]}</option>`
         ).join('');
         
         toUnit.innerHTML = units.map(unit => 
-            `<option value="${unit}">${unit}</option>`
+            `<option value="${unit}">${labels[unit]}</option>`
         ).join('');
         
         convert();

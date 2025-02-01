@@ -25,10 +25,44 @@ export function initGifGenerator() {
         }
 
         selectedFiles = selectedFiles.concat(imageFiles);
-        updateImageList();
+        updatePreview();
+        processImages();
     }
 
-    function updateImageList() {
+    function updatePreview() {
+        const previewContainer = document.getElementById('selectedImagesPreview');
+        previewContainer.innerHTML = '';
+
+        selectedFiles.forEach((file, index) => {
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+
+            const removeButton = document.createElement('button');
+            removeButton.className = 'remove-image';
+            removeButton.innerHTML = '×';
+            removeButton.onclick = () => removeImage(index);
+
+            previewItem.appendChild(img);
+            previewItem.appendChild(removeButton);
+            previewContainer.appendChild(previewItem);
+        });
+    }
+
+    function removeImage(index) {
+        selectedFiles.splice(index, 1);
+        updatePreview();
+        processImages();
+        
+        if (selectedFiles.length === 0) {
+            generateBtn.disabled = true;
+            preview.innerHTML = '';
+        }
+    }
+
+    function processImages() {
         imageList.innerHTML = '';
         images = [];
         generateBtn.disabled = true;
@@ -45,26 +79,22 @@ export function initGifGenerator() {
                     images.push(img);
 
                     const item = document.createElement('div');
-                    item.className = 'image-item';
+                    item.className = 'gif-image-item';
 
                     const previewImg = document.createElement('img');
                     previewImg.src = event.target.result;
+                    previewImg.alt = `이미지 ${index + 1}`;
 
                     const removeBtn = document.createElement('button');
-                    removeBtn.className = 'remove-btn';
+                    removeBtn.className = 'gif-remove-image';
                     removeBtn.innerHTML = '×';
                     removeBtn.onclick = (e) => {
                         e.preventDefault();
-                        removeImage(file);
+                        removeImage(index);
                     };
-
-                    const orderText = document.createElement('span');
-                    orderText.className = 'order-text';
-                    orderText.textContent = `${index + 1}`;
 
                     item.appendChild(previewImg);
                     item.appendChild(removeBtn);
-                    item.appendChild(orderText);
                     imageList.appendChild(item);
 
                     if (images.length > 0) {
@@ -75,14 +105,6 @@ export function initGifGenerator() {
             };
             reader.readAsDataURL(file);
         });
-    }
-
-    function removeImage(file) {
-        const index = selectedFiles.indexOf(file);
-        if (index > -1) {
-            selectedFiles.splice(index, 1);
-            updateImageList();
-        }
     }
 
     function generateGif() {

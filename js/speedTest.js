@@ -12,6 +12,8 @@ export function initSpeedTest() {
 
     startSpeedTestBtn.addEventListener('click', async () => {
         startSpeedTestBtn.disabled = true;
+        startSpeedTestBtn.classList.add('loading');
+        startSpeedTestBtn.textContent = '테스트 진행 중...';
         speedTestLog.innerHTML = ''; // 로그 초기화
         logMessage('테스트 시작...');
 
@@ -48,6 +50,8 @@ export function initSpeedTest() {
 
         logMessage('테스트 완료');
         startSpeedTestBtn.disabled = false;
+        startSpeedTestBtn.classList.remove('loading');
+        startSpeedTestBtn.textContent = '테스트 시작';
     });
 
     function logMessage(message) {

@@ -1,0 +1,139 @@
+#qrcode {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+/* QR코드 섹션 설명 스타일 */
+.qr-section-description {
+    background: #f8f9fa;
+    border-left: 4px solid #4C6EF5;
+    padding: 20px 24px;
+    margin: 24px 0;
+    border-radius: 0 8px 8px 0;
+    line-height: 1.7;
+}
+
+.qr-section-description p {
+    color: #495057;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.qr-section-description ul {
+    margin-left: 20px;
+}
+
+.qr-section-description li {
+    color: #495057;
+    margin: 8px 0;
+    position: relative;
+}
+
+.qr-section-description li::before {
+    content: "•";
+    color: #43a047;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+/* 입력 영역 */
+.input-group {
+    display: flex;
+    gap: 12px;
+    margin: 30px 0;
+    max-width: 800px;
+}
+
+#qrInput {
+    flex: 1;
+    padding: 14px 16px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.2s;
+}
+
+#qrInput:focus {
+    outline: none;
+    border-color: #43a047;
+    box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.1);
+}
+
+#generateQR {
+    padding: 14px 28px;
+    background: #43a047;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#generateQR:hover {
+    background: #2e7d32;
+}
+
+/* QR 코드 결과 영역 */
+#qrResult {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    padding: 30px;
+    background: #f8faf9;
+    border-radius: 12px;
+}
+
+#qrResult img {
+    border: 8px solid white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 다운로드 버튼 */
+#downloadQR {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 12px 24px;
+    background: #2A395A;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#downloadQR:hover {
+    background: #1e2a43;
+    transform: translateY(-1px);
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    #qrcode {
+        padding: 20px;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    #generateQR {
+        width: 100%;
+    }
+
+    #qrResult {
+        padding: 15px;
+    }
+
+    #qrResult img {
+        max-width: 100%;
+        height: auto;
+    }
+} 

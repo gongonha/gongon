@@ -1,0 +1,251 @@
+/* pdf-tools.css */
+/* PDF 도구 스타일 */
+.pdf-tools-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.tool-section {
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.tool-section:hover {
+  transform: translateY(-3px);
+}
+
+.tool-section h3 {
+  color: #1864ab;
+  font-size: 1.3em;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.section-description {
+  background: #f8f9fa;
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #228be6;
+}
+
+.section-description p {
+  color: #495057;
+  margin-bottom: 0.8rem;
+  font-size: 0.95em;
+}
+
+.section-description ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.section-description li {
+  color: #666;
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.section-description li:before {
+  content: "•";
+  color: #228be6;
+  position: absolute;
+  left: 0.5rem;
+}
+
+.input-group {
+  margin: 1.5rem 0;
+}
+
+.tool-section .input-group .pdf-file-label {
+  display: inline-block;
+  padding: 10px 15px;
+  background: #228be6;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-align: center;
+  width: 200px;
+}
+
+.tool-section .input-group .pdf-file-label:hover {
+  background: #1c7ed6;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 139, 230, 0.2);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.options-group {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.options-group select {
+  flex: 1;
+  padding: 0.8rem;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  background-color: white;
+  color: #495057;
+  font-size: 0.95em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.options-group select:hover {
+  border-color: #4c6ef5;
+}
+
+.options-group select:focus {
+  outline: none;
+  border-color: #4c6ef5;
+  box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.1);
+}
+
+.sortable-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.2rem;
+  margin: 1.5rem 0;
+}
+
+.image-item {
+  position: relative;
+  background: white;
+  padding: 0.8rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  cursor: move;
+  transition: all 0.2s ease;
+}
+
+.image-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.image-item.dragging {
+  opacity: 0.6;
+  transform: scale(1.05);
+}
+
+.image-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.image-item span {
+  display: block;
+  font-size: 0.9em;
+  color: #495057;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0.3rem 0;
+}
+
+.remove-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fa5252;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  box-shadow: 0 2px 6px rgba(250, 82, 82, 0.3);
+  transition: all 0.2s ease;
+}
+
+.remove-btn:hover {
+  background: #e03131;
+  transform: scale(1.1);
+}
+
+.pdf-page-container {
+  background: white;
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.pdf-page-container canvas {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.download-btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: #40c057;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+  background: #37b24d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(64, 192, 87, 0.2);
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: #228be6 !important;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #1c7ed6 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 139, 230, 0.2);
+}
+
+@media (max-width: 768px) {
+  .options-group {
+    flex-direction: column;
+  }
+  
+  .sortable-list {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+  
+  .tool-section {
+    padding: 1.5rem;
+  }
+}

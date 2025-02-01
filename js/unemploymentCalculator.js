@@ -14,7 +14,8 @@ export function initUnemploymentCalculator() {
         }
 
         if (resignationReason === 'voluntary') {
-            resultDisplay.textContent = '자발적 퇴사는 실업급여 대상이 아닙니다.';
+            resultDisplay.innerHTML = '자발적 퇴사는 실업급여 대상이 아닙니다.';
+            resultDisplay.className = 'show voluntary';
             return;
         }
 
@@ -41,13 +42,26 @@ export function initUnemploymentCalculator() {
         const totalUnemploymentPay = dailyUnemploymentPay * totalPaymentDays;
 
         // 결과 표시
+        resultDisplay.className = 'show';
         resultDisplay.innerHTML = `
-            <p><strong>실업급여 계산 결과</strong></p>
+            <p>실업급여 계산 결과</p>
             <ul>
-                <li>1일 평균임금: ${dailyWage.toLocaleString()} 원</li>
-                <li>1일 실업급여: ${dailyUnemploymentPay.toLocaleString()} 원</li>
-                <li>지급일 수: ${totalPaymentDays} 일</li>
-                <li>총 실업급여: ${totalUnemploymentPay.toLocaleString()} 원</li>
+                <li>
+                    <span>1일 평균임금</span>
+                    <span>${Math.floor(dailyWage).toLocaleString()} 원</span>
+                </li>
+                <li>
+                    <span>1일 실업급여</span>
+                    <span>${Math.floor(dailyUnemploymentPay).toLocaleString()} 원</span>
+                </li>
+                <li>
+                    <span>지급일 수</span>
+                    <span>${totalPaymentDays} 일</span>
+                </li>
+                <li>
+                    <span>총 실업급여</span>
+                    <span>${Math.floor(totalUnemploymentPay).toLocaleString()} 원</span>
+                </li>
             </ul>
         `;
     });

@@ -1,0 +1,174 @@
+/* 예약 이동 컨테이너 */
+.reservation-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* 입력 그룹 스타일 */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #495057;
+    font-weight: 500;
+    font-size: 0.95em;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 0.95em;
+    transition: all 0.2s ease;
+    background-color: #fff;
+}
+
+.input-group input:focus {
+    border-color: #4C6EF5;
+    box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.1);
+    outline: none;
+}
+
+/* 버튼 그룹 스타일 */
+.reservation-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #4C6EF5;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #4263eb;
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background-color: #fa5252;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #e03131;
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background-color: #40c057;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #37b24d;
+    transform: translateY(-1px);
+}
+
+.btn:disabled {
+    background-color: #adb5bd;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 예약 목록 스타일 */
+.reservation-list {
+    margin-top: 30px;
+}
+
+.reservation-item {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.reservation-item:hover {
+    border-color: #4C6EF5;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.reservation-info {
+    flex: 1;
+}
+
+.reservation-info p {
+    margin: 8px 0;
+    color: #495057;
+    font-size: 0.95em;
+}
+
+.reservation-info strong {
+    color: #343a40;
+    margin-right: 8px;
+}
+
+.reservation-actions {
+    margin-left: 20px;
+}
+
+/* 파일 업로드 버튼 스타일 */
+.upload-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-btn input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    opacity: 0;
+    outline: none;
+    cursor: pointer;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .reservation-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .reservation-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .reservation-actions {
+        margin-left: 0;
+        margin-top: 15px;
+    }
+    
+    .reservation-actions button {
+        width: 100%;
+    }
+} 

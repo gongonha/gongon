@@ -1,5 +1,4 @@
 /* js/main.js */
-import { initMetadataViewer } from "./metadataViewer.js";
 import { initCalculator } from "./calculator.js";
 import { initUnitConverter } from "./converter.js";
 import { initImageCompressor } from "./imageCompressor.js";
@@ -18,12 +17,9 @@ import { initTextAnalyzer } from "./textAnalyzer.js";
 import { initUrlShortener } from "./urlShortener.js";
 import { initFaviconGenerator } from "./faviconGenerator.js";
 import { initGifGenerator } from './gifGenerator.js';
-import { initLoanCalculator } from './loanCalculator.js';
 import { initProjectManager } from './projectManager.js';
 import { initMemoTool } from "./memoTool.js";
 import { initTextEncryption } from './textEncryption.js';
-import { initLottoCalculator } from './lottoCalculator.js';
-import { initLottoRecommend } from './lottoRecommend.js';
 import { initSavingsCalculator } from './savingsCalculator.js';
 import { initFoodRecommend } from './foodRecommend.js';
 
@@ -41,6 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 메뉴 네비게이션
     document.querySelectorAll('#menu button').forEach(button => {
+        // 오디오 컨트롤 버튼은 제외
+        if (button.classList.contains('control-btn')) return;
+
         button.addEventListener('click', () => {
             // 모든 버튼의 active 클래스 제거
             document.querySelectorAll('#menu button').forEach(btn => {
@@ -74,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 개별 기능 모듈 초기화
-    initMetadataViewer();
     initCalculator();
     initUnitConverter();
     initImageCompressor();
@@ -93,57 +91,71 @@ document.addEventListener('DOMContentLoaded', () => {
     initUrlShortener();
     initFaviconGenerator();
     initGifGenerator();
-    initLoanCalculator();
     initProjectManager();
-
-    // 메모 도구 초기화를 setTimeout으로 지연
-    setTimeout(() => {
-        initMemoTool();
-    }, 100);
-
-    // 메뉴 토글 기능
-    initMenuToggle();
+    initMemoTool();
+    initTextEncryption();
+    initSavingsCalculator();
+    initFoodRecommend();
 
     // 오디오 플레이어 초기화
     initAudioPlayer();
 
-    initTextEncryption();
-
-    initLottoCalculator();
-    initLottoRecommend();
-
-    initSavingsCalculator();
-
-    initFoodRecommend();
-});
-
-// 메뉴 토글 기능
-function initMenuToggle() {
-    const menuToggle = document.getElementById('menuToggle');
-    const menu = document.getElementById('menu');
-
-    function toggleMenu() {
-        const isOpen = menu.classList.contains('menu-open');
-        menuToggle.textContent = isOpen ? '메뉴 열기' : '메뉴 닫기';
-        menu.classList.toggle('menu-open');
+    // 날씨 서비스 초기화
+    if (document.querySelector('.weather-section')) {
+        import('./weather.js')
+            .then(module => {
+                new module.WeatherService();
+            })
+            .catch(error => {
+                console.error('날씨 모듈 로딩 실패:', error);
+            });
     }
 
-    menuToggle.addEventListener('click', toggleMenu);
-
-    // 메뉴 항목 클릭 시 메뉴 닫기
-    const menuButtons = menu.querySelectorAll('button');
-    menuButtons.forEach(button => {
+    initMenuGroups();
+    
+    // 메뉴 버튼 클릭 시 해당 그룹 펼치기
+    document.querySelectorAll('#menu button').forEach(button => {
         button.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                toggleMenu();
+            // 모든 버튼의 active 클래스 제거
+            document.querySelectorAll('#menu button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 클릭된 버튼에 active 클래스 추가
+            button.classList.add('active');
+            
+            // 현재 활성화된 버튼의 그룹 content 펼치기
+            const activeGroup = button.closest('.menu-group');
+            if (activeGroup) {
+                const activeTitle = activeGroup.querySelector('.menu-group-title');
+                const activeContent = activeGroup.querySelector('.menu-group-content');
+                
+                activeTitle.classList.remove('collapsed');
+                activeContent.classList.remove('collapsed');
             }
         });
     });
-}
+
+    // 메뉴 토글 기능 추가
+    const menuToggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('menu');
+    
+    if (menuToggle && menu) {
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('menu-open');
+            menuToggle.textContent = menu.classList.contains('menu-open') 
+                ? '메뉴 닫기' 
+                : '메뉴 열기';
+        });
+    }
+});
 
 function initAudioPlayer() {
     const audioSelect = document.getElementById('audioSelect');
     const audioElement = document.getElementById('audioElement');
+    const volumeControl = document.getElementById('volumeControl');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const stopBtn = document.getElementById('stopBtn');
     
     const audioUrls = {
         '1': 'https://blog.kakaocdn.net/dn/DaPnJ/btr4wEGwDDh/MJMRFCWzn2nDUwd6eM9Xlk/1.wav?attach=1&knm=tfile.wav',
@@ -152,6 +164,14 @@ function initAudioPlayer() {
         '7': 'https://blog.kakaocdn.net/dn/bKQk3R/btr4TJseWVN/g5EPpVVfhIAZwKxSXac3G1/7.wav?attach=1&knm=tfile.wav',
         '9': 'https://blog.kakaocdn.net/dn/bkO4sF/btr4wMqYGIp/KCQQJlDpKA6BL3qvjq38P1/9.wav?attach=1&knm=tfile.wav'
     };
+
+    // 볼륨 컨트롤 이벤트
+    volumeControl.addEventListener('input', () => {
+        audioElement.volume = volumeControl.value;
+    });
+    
+    // 초기 볼륨 설정
+    audioElement.volume = volumeControl.value;
 
     audioSelect.addEventListener('change', () => {
         const selectedValue = audioSelect.value;
@@ -177,4 +197,82 @@ function initAudioPlayer() {
             audioElement.play();
         }
     });
+
+    // 재생/일시정지 버튼 클릭 이벤트
+    playPauseBtn.addEventListener('click', () => {
+        if (audioElement.paused) {
+            audioElement.play();
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+            audioElement.pause();
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        }
+    });
+    
+    // 정지 버튼 클릭 이벤트
+    stopBtn.addEventListener('click', () => {
+        audioElement.pause();
+        audioElement.currentTime = 0;
+        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+    });
+}
+
+function initMenuGroups() {
+    const menuGroups = document.querySelectorAll('.menu-group');
+    
+    menuGroups.forEach(group => {
+        const title = group.querySelector('.menu-group-title');
+        const content = group.querySelector('.menu-group-content');
+        
+        // 초기 상태: 모든 메뉴 그룹을 접은 상태로 시작
+        if (!content.querySelector('button.active')) {
+            title.classList.add('collapsed');
+            content.classList.add('collapsed');
+            content.style.display = 'none';
+        }
+        
+        title.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const isCollapsed = content.classList.contains('collapsed');
+            
+            // 다른 모든 메뉴 그룹 접기
+            menuGroups.forEach(otherGroup => {
+                if (otherGroup !== group) {
+                    const otherTitle = otherGroup.querySelector('.menu-group-title');
+                    const otherContent = otherGroup.querySelector('.menu-group-content');
+                    if (!otherContent.querySelector('button.active')) {
+                        otherTitle.classList.add('collapsed');
+                        otherContent.classList.add('collapsed');
+                        otherContent.style.display = 'none';
+                    }
+                }
+            });
+            
+            // 현재 그룹 토글
+            title.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+            
+            if (isCollapsed) {
+                content.style.display = 'block';
+            } else {
+                content.style.display = 'none';
+            }
+        });
+    });
+
+    // 현재 활성화된 메뉴의 그룹은 펼쳐진 상태로 유지
+    const activeButton = document.querySelector('#menu button.active');
+    if (activeButton) {
+        const activeGroup = activeButton.closest('.menu-group');
+        if (activeGroup) {
+            const activeTitle = activeGroup.querySelector('.menu-group-title');
+            const activeContent = activeGroup.querySelector('.menu-group-content');
+            
+            activeTitle.classList.remove('collapsed');
+            activeContent.classList.remove('collapsed');
+            activeContent.style.display = 'block';
+        }
+    }
 }

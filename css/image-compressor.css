@@ -1,0 +1,146 @@
+.IC_compressor-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.IC_file-label {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.IC_file-label:hover {
+    background-color: #45a049;
+}
+
+.IC_compression-options {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.IC_input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.IC_input-group label {
+    font-weight: 500;
+    color: #333;
+}
+
+.IC_input-group input {
+    padding: 8px 12px;
+    width: 120px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#imageInput {
+    display: none;
+}
+
+.IC_preview-item {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.IC_previews-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.IC_preview-box {
+    flex: 1;
+    min-width: 300px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.IC_preview-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.IC_info-box {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.IC_info-box h4 {
+    margin: 0 0 12px 0;
+    color: #2196F3;
+    font-size: 16px;
+}
+
+.IC_info-box p {
+    margin: 8px 0;
+    color: #555;
+    font-size: 14px;
+}
+
+.IC_info-box strong {
+    color: #333;
+}
+
+.IC_download-btn {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.IC_download-btn:hover {
+    background-color: #1976D2;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.IC_download-btn i {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .IC_compression-options {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .IC_preview-box {
+        min-width: 100%;
+    }
+} 

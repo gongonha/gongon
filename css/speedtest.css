@@ -1,0 +1,176 @@
+.speedtest-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+/* 시작 버튼 */
+#startSpeedTest {
+    width: 100%;
+    padding: 16px 24px;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 30px;
+}
+
+#startSpeedTest:hover {
+    background: #1976D2;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+}
+
+#startSpeedTest:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 속도 결과 그리드 */
+.speed-results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.speed-item {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.3s;
+}
+
+.speed-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.speed-item span:first-child {
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.speed-item span:last-child {
+    color: #2196F3;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* 로그 영역 */
+.speed-test-log {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-family: monospace;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.speed-test-log div {
+    padding: 8px 12px;
+    border-left: 3px solid #2196F3;
+    background: white;
+    margin-bottom: 8px;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+    animation: slideIn 0.3s ease-out;
+}
+
+.speed-test-log div:last-child {
+    margin-bottom: 0;
+}
+
+/* 애니메이션 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 스크롤바 스타일링 */
+.speed-test-log::-webkit-scrollbar {
+    width: 8px;
+}
+
+.speed-test-log::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.speed-test-log::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.speed-test-log::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+/* 로딩 상태 표시 */
+#startSpeedTest.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+#startSpeedTest.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .speedtest-container {
+        padding: 20px;
+        margin: 0 15px;
+    }
+    
+    .speed-results {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .speed-item span:last-child {
+        font-size: 20px;
+    }
+} 

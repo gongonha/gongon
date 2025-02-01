@@ -210,11 +210,11 @@ export function initTextCompare() {
         let highlightedLine1 = '';
         let highlightedLine2 = '';
         let diffCount = 0;
-        const diffPairs = []; // [c1, c2, lineIndex, idx1, idx2]
+        const diffPairs = [];
 
         for (let k = 0; k < alignedLine1.length; k++) {
-            const left = alignedLine1[k];   // { char, type, index }
-            const right = alignedLine2[k];  // { char, type, index }
+            const left = alignedLine1[k];
+            const right = alignedLine2[k];
 
             if (left.type === 'same' && right.type === 'same') {
                 // 동일 문자
@@ -226,17 +226,26 @@ export function initTextCompare() {
                 ]);
             } else {
                 // diff
-                if (left.char) {
-                    highlightedLine1 += `
-                        <span class="diff-removed">${escapeHtml(left.char)}</span>
-                    `;
-                    diffCount++;
-                }
-                if (right.char) {
-                    highlightedLine2 += `
-                        <span class="diff-added">${escapeHtml(right.char)}</span>
-                    `;
-                    diffCount++;
+                if (left.char === ' ' || right.char === ' ') {
+                    // 띄어쓰기 차이인 경우
+                    if (left.char) {
+                        highlightedLine1 += `<span class="diff-space">v</span>`;
+                        diffCount++;
+                    }
+                    if (right.char) {
+                        highlightedLine2 += `<span class="diff-space">v</span>`;
+                        diffCount++;
+                    }
+                } else {
+                    // 일반 문자 차이
+                    if (left.char) {
+                        highlightedLine1 += `<span class="diff-removed">${escapeHtml(left.char)}</span>`;
+                        diffCount++;
+                    }
+                    if (right.char) {
+                        highlightedLine2 += `<span class="diff-added">${escapeHtml(right.char)}</span>`;
+                        diffCount++;
+                    }
                 }
 
                 diffPairs.push([

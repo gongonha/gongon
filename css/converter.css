@@ -1,0 +1,129 @@
+#converter {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.converter-container {
+    max-width: 800px;
+    margin: 24px auto;
+}
+
+/* 변환 타입 선택 */
+#conversionType {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 24px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #2A395A;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#conversionType:focus {
+    outline: none;
+    border-color: #4263eb;
+    box-shadow: 0 0 0 3px rgba(66, 99, 235, 0.1);
+}
+
+/* 변환 입력 영역 */
+.conversion-inputs {
+    display: grid;
+    gap: 40px;  /* 화살표를 위한 공간 확보 */
+    background: #f8f9fa;
+    padding: 24px;
+    border-radius: 12px;
+    position: relative;
+}
+
+.input-group {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 12px;
+}
+
+.input-group input {
+    padding: 12px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #4263eb;
+    box-shadow: 0 0 0 3px rgba(66, 99, 235, 0.1);
+}
+
+.input-group input[readonly] {
+    background: #e9ecef;
+    color: #2A395A;
+    font-weight: 500;
+}
+
+.input-group select {
+    padding: 12px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+}
+
+.input-group select:focus {
+    outline: none;
+    border-color: #4263eb;
+    box-shadow: 0 0 0 3px rgba(66, 99, 235, 0.1);
+}
+
+/* 단위 옵션 스타일링 */
+.input-group select option {
+    padding: 8px;
+    font-size: 15px;
+}
+
+/* 화살표 아이콘 중앙 배치 */
+.conversion-inputs::after {
+    content: "\f338"; /* Font Awesome 수직 양방향 화살표 */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #4263eb;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* 모바일에서 화살표 위치 조정 */
+@media (max-width: 768px) {
+    #converter {
+        padding: 20px;
+    }
+
+    .input-group {
+        grid-template-columns: 1fr;
+    }
+
+    .conversion-inputs {
+        padding: 16px;
+        gap: 50px;  /* 모바일에서 간격 조정 */
+    }
+} 

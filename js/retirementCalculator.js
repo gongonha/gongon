@@ -16,24 +16,37 @@ export function initRetirementCalculator() {
         }
 
         // 1일 평균임금 계산: 월급 + (상여금 ÷ 3개월) ÷ 30일
-        const dailyWage = (averageSalary + bonuses / 3) / 30;
+        const dailyWage = Math.floor((averageSalary + bonuses / 3) / 30);
 
         // 퇴직금 계산: 1일 평균임금 × 30일 × 근속연수
-        const retirementPayBeforeTax = dailyWage * 30 * yearsWorked;
+        const retirementPayBeforeTax = Math.floor(dailyWage * 30 * yearsWorked);
 
         // 세금 공제
-        const taxAmount = retirementPayBeforeTax * taxRate;
-        const netRetirementPay = retirementPayBeforeTax - taxAmount;
+        const taxAmount = Math.floor(retirementPayBeforeTax * taxRate);
+        const netRetirementPay = Math.floor(retirementPayBeforeTax - taxAmount);
 
         // 결과 표시
         resultDisplay.innerHTML = `
-            <p><strong>퇴직금 계산 결과</strong></p>
+            <p>퇴직금 계산 결과</p>
             <ul>
-                <li>1일 평균임금: ${dailyWage.toLocaleString()} 원</li>
-                <li>퇴직금 (세전): ${retirementPayBeforeTax.toLocaleString()} 원</li>
-                <li>공제된 세금: ${taxAmount.toLocaleString()} 원</li>
-                <li>최종 퇴직금 (세후): ${netRetirementPay.toLocaleString()} 원</li>
+                <li>
+                    <span>1일 평균임금</span>
+                    <span>${dailyWage.toLocaleString()} 원</span>
+                </li>
+                <li>
+                    <span>퇴직금 (세전)</span>
+                    <span>${retirementPayBeforeTax.toLocaleString()} 원</span>
+                </li>
+                <li>
+                    <span>공제된 세금 (${(taxRate * 100).toFixed(1)}%)</span>
+                    <span>${taxAmount.toLocaleString()} 원</span>
+                </li>
+                <li>
+                    <span>최종 퇴직금 (세후)</span>
+                    <span>${netRetirementPay.toLocaleString()} 원</span>
+                </li>
             </ul>
         `;
+        resultDisplay.classList.add('show');
     });
 }
